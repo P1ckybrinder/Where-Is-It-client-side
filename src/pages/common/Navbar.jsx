@@ -3,6 +3,7 @@ import logo from '../../assets/istockphoto-477273563-612x612.jpg';
 import AuthContext from '../../context/Authcontext/AuthContext';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
@@ -28,18 +29,21 @@ const Navbar = () => {
     );
 
     return (
-        <div className="sticky top-0 z-50 bg-white text-teal-600 shadow-lg px-3 lg:px-8">
+        <div className="sticky top-0 z-50 bg-white text-zetech-primary shadow-lg px-3 lg:px-8">
             <div className="navbar  mx-auto ">
                 {/* Navbar Start */}
                 <div className="navbar-start flex items-center" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                     {/* Logo */}
-                    <img className="w-16 rounded-full" src={logo} alt="Lost and Found Logo" />
-                    <span className="text-2xl font-bold ml-3 font-poppins text-teal-600">WhereIsIt</span>
+                    <img className="w-16 rounded-full" src={logo} alt="Zetech Lost and Found Logo" />
+                    <div className="flex flex-col">
+                        <span className="text-2xl font-bold ml-3 font-poppins text-zetech-primary">{schoolConfig.name}</span>
+                        <span className="text-xs ml-3 text-zetech-secondary">{schoolConfig.slogan}</span>
+                    </div>
                 </div>
 
                 {/* Navbar Center for Large Screens */}
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal space-x-2 text-teal-600 font-medium">
+                    <ul className="menu menu-horizontal space-x-2 text-zetech-primary font-medium">
                         {links}
                     </ul>
                 </div>
@@ -51,14 +55,14 @@ const Navbar = () => {
                         <div className="dropdown dropdown-end">
                             <button
                                 tabIndex={0}
-                                className="btn btn-ghost btn-circle avatar hover:bg-teal-200 transition">
+                                className="btn btn-ghost btn-circle avatar hover:bg-zetech-light transition">
                                 <div className="w-10 rounded-full">
                                     <img alt={user.email} title={user.displayName} src={user.photoURL} />
                                 </div>
                             </button>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-white text-teal-600 rounded-box mt-3 w-52 shadow-lg">
+                                className="menu menu-sm dropdown-content bg-white text-zetech-primary rounded-box mt-3 w-52 shadow-lg">
                                   {links} 
                                 <li><Link to="/addItems">Add Lost & Found Item</Link></li>
                                 <li><Link to="/allRecovered">All Recovered Items</Link></li>
@@ -66,7 +70,7 @@ const Navbar = () => {
                                 <li>
                                     <button
                                         onClick={handleSignOut}
-                                        className="bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-2 px-4 rounded-md hover:bg-gradient-to-l transition">
+                                        className="bg-gradient-to-r from-zetech-secondary to-orange-600 text-white font-bold py-2 px-4 rounded-md hover:from-orange-500 hover:to-orange-700 transition">
                                         Sign Out
                                     </button>
                                 </li>
@@ -98,12 +102,12 @@ const Navbar = () => {
                             {/* Dropdown Menu */}
                             {isMenuOpen && (
                                 <div className="absolute top-14 right-4 bg-white rounded-lg shadow-lg z-50 w-48">
-                                    <ul className="menu menu-compact space-y-2 p-4 text-teal-600">
+                                    <ul className="menu menu-compact space-y-2 p-4 text-zetech-primary">
                                         {links}
                                         <li>
                                             <NavLink
                                                 to="/register"
-                                                className="block bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gradient-to-l transition"
+                                                className="block bg-gradient-to-r from-zetech-secondary to-orange-600 text-white font-bold py-2 px-4 rounded-lg hover:from-orange-500 hover:to-orange-700 transition"
                                             >
                                                 Sign Up
                                             </NavLink>
@@ -111,7 +115,7 @@ const Navbar = () => {
                                         <li>
                                             <NavLink
                                                 to="/signin"
-                                                className="block bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gradient-to-l transition"
+                                                className="block bg-gradient-to-r from-zetech-secondary to-orange-600 text-white font-bold py-2 px-4 rounded-lg hover:from-orange-500 hover:to-orange-700 transition"
                                             >
                                                 Sign In
                                             </NavLink>
@@ -127,13 +131,13 @@ const Navbar = () => {
                         <div className="hidden lg:flex space-x-4">
                             <NavLink
                                 to="/register"
-                                className="bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-2 px-5 rounded-md hover:bg-gradient-to-l transition text-[0.8rem]"
+                                className="bg-gradient-to-r from-zetech-secondary to-orange-600 text-white font-bold py-2 px-5 rounded-md hover:from-orange-500 hover:to-orange-700 transition text-[0.8rem]"
                             >
                                 Sign Up
                             </NavLink>
                             <NavLink
                                 to="/signin"
-                                className="bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-2 px-5 rounded-md hover:bg-gradient-to-l transition text-[0.8rem]"
+                                className="bg-gradient-to-r from-zetech-secondary to-orange-600 text-white font-bold py-2 px-5 rounded-md hover:from-orange-500 hover:to-orange-700 transition text-[0.8rem]"
                             >
                                 Sign In
                             </NavLink>

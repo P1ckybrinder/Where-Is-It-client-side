@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import ItemsCard from '../Home/ItemsCard';
 import { Helmet } from 'react-helmet-async';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const AllItems = () => {
     const items = useLoaderData();
@@ -41,12 +42,12 @@ const AllItems = () => {
     return (
         <div className="container mx-auto px-4 py-8 min-h-screen">
             <Helmet>
-                <title>Lost & Found Page</title>
+                <title>Lost & Found Items - {schoolConfig.name}</title>
             </Helmet>
             
             {/* Header Section */}
             <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-teal-600 mb-2">Discover Items</h1>
+                <h1 className="text-3xl font-bold text-zetech-primary mb-2">Discover Items</h1>
                 <p className="text-gray-600 font-semibold">Find what you're looking for or list lost and found items easily!</p>
             </div>
 
@@ -59,7 +60,7 @@ const AllItems = () => {
                     <input
                         type="text"
                         placeholder="Search by title, location, or category"
-                        className="input input-bordered w-full rounded-full pl-12 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all duration-200"
+                        className="input input-bordered w-full rounded-full pl-12 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary transition-all duration-200"
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                     />
@@ -72,7 +73,7 @@ const AllItems = () => {
                     <ul className="space-y-2">
                         <li>
                             <button 
-                                className={`w-full text-lg font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${!selectedCategory ? 'bg-teal-500 text-white' : 'text-gray-600'}`}
+                                className={`w-full text-lg font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${!selectedCategory ? 'bg-zetech-primary text-white' : 'text-gray-600'}`}
                                 onClick={() => setSelectedCategory('')}
                             >
                                 All Categories
@@ -81,7 +82,7 @@ const AllItems = () => {
                         {categories.map((category) => (
                             <li key={category}>
                                 <button 
-                                    className={`w-full text-sm font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${selectedCategory === category ? 'bg-teal-500 text-white' : 'text-gray-600'}`}
+                                    className={`w-full text-sm font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${selectedCategory === category ? 'bg-zetech-primary text-white' : 'text-gray-600'}`}
                                     onClick={() => setSelectedCategory(category)}
                                 >
                                     {category}
@@ -96,7 +97,7 @@ const AllItems = () => {
                     {/* Spinner */}
                     {loading ? (
                         <div className="flex justify-center items-center h-32">
-                            <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-12 h-12 border-4 border-zetech-primary border-t-transparent rounded-full animate-spin"></div>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -117,7 +118,7 @@ const AllItems = () => {
             {/* Footer Section */}
             <div className="text-center mt-12 mb-12">
                 <Link to="/addItems">
-                    <button className="bg-gradient-to-r from-teal-400 to-teal-600 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 focus:outline-none">
+                    <button className="bg-gradient-to-r from-zetech-secondary to-orange-600 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 focus:outline-none">
                         Post Your Item
                     </button>
                 </Link>

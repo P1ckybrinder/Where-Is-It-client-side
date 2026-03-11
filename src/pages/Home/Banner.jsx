@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Lottie from 'lottie-react';
 import { motion } from 'framer-motion';
+import { schoolConfig } from '../../config/schoolConfig';
 
 // Import your Lottie JSON animations
 import animation1 from '../../assets/slide2.json';
@@ -25,23 +26,23 @@ const Banner = () => {
 
   const slides = [
     {
-      title: "Lost Something? Find It Here!",
-      description: "Join a community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.",
+      title: `Lost Something? Find It Here!`,
+      description: `Join ${schoolConfig.name}'s community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.`,
       animation: animation1,
     },
     {
       title: "Helping You Recover What Matters",
-      description: "If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.",
+      description: `If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.`,
       animation: animation2,
     },
     {
       title: "Lost? Found? Let's Connect!",
-      description:"Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.",
+      description:`Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.`,
       animation: animation3,
     },
     {
       title: "Reunite What's Lost",
-      description:"Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.",
+      description:`Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.`,
       animation: animation4,
     },
   ];
@@ -50,7 +51,7 @@ const Banner = () => {
     <div className="container mx-auto my-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <Slider {...settings} className="slick-slider-custom">
         {slides.map((slide, index) => (
-          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-teal-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
+          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
             <motion.div
               className="flex flex-col md:flex-row justify-between items-center h-full gap-6"
               initial={{ opacity: 0 }}
@@ -63,7 +64,7 @@ const Banner = () => {
             >
               <div className="w-full md:w-1/2 text-left p-4">
                 <motion.h2 
-                  className="text-2xl md:text-3xl font-bold text-teal-600 dark:text-teal-400 mb-3"
+                  className="text-2xl md:text-3xl font-bold text-zetech-primary dark:text-blue-400 mb-3"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
