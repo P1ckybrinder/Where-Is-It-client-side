@@ -105,7 +105,7 @@ const Banner = () => {
         </div>
       </motion.div>
 
-      {/* Floating Stats Cards */}
+      {/* Floating Stats Cards - Theme-Aware */}
       <motion.div
         className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
         initial={{ opacity: 0, y: 20 }}
@@ -113,23 +113,36 @@ const Banner = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         {[
-          { label: 'Items Reunited', value: '1,200+' },
-          { label: 'Active Users', value: '500+' },
-          { label: 'Success Rate', value: '85%' },
-          { label: 'Campus Locations', value: '20+' }
+          { label: 'Items Reunited', value: '1,200+', icon: '📦' },
+          { label: 'Active Users', value: '500+', icon: '👥' },
+          { label: 'Success Rate', value: '85%', icon: '✨' },
+          { label: 'Campus Locations', value: '20+', icon: '📍' }
         ].map((stat, index) => (
           <motion.div
             key={index}
-            className="glass-liquid-premium p-4 md:p-6 rounded-2xl text-center"
-            whileHover={{ y: -4 }}
+            className="relative p-4 md:p-6 rounded-2xl text-center overflow-hidden group"
+            whileHover={{ y: -4, scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-white/90 text-sm md:text-base font-semibold text-glass-light">
-              {stat.value}
-            </p>
-            <p className="text-white/60 text-xs md:text-sm mt-1">
-              {stat.label}
-            </p>
+            {/* Background - Light theme: dark green, Dark theme: glass effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-emerald-700 dark:from-slate-800/40 dark:to-slate-900/40 rounded-2xl backdrop-blur-md dark:backdrop-blur-lg border border-teal-500/30 dark:border-teal-500/20"/>
+            
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full">
+              <p className="text-2xl md:text-3xl mb-2">{stat.icon}</p>
+              <p className="text-white dark:text-white text-lg md:text-2xl font-bold">
+                {stat.value}
+              </p>
+              <p className="text-white/90 dark:text-teal-100 text-xs md:text-sm mt-2 font-semibold">
+                {stat.label}
+              </p>
+            </div>
+
+            {/* Hover glow effect */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
+              background: 'radial-gradient(circle at center, rgba(16,185,129,0.2) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }}/>
           </motion.div>
         ))}
       </motion.div>
