@@ -1,148 +1,312 @@
-import React, { useContext, useState } from 'react';
-import logo from '../../assets/istockphoto-477273563-612x612.jpg';
-import AuthContext from '../../context/Authcontext/AuthContext';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import logo from "../../assets/istockphoto-477273563-612x612.jpg";
+import AuthContext from "../../context/Authcontext/AuthContext";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuRef = useRef(null);
+    const buttonRef = useRef(null);
+    const location = useLocation();
     const navigate = useNavigate();
-    
-    const handleSignOut = () => {
-        signOutUser()
-            .then(() => {
-                toast.success('Successfully signed out!');
-            })
-            .catch(() => {
-                toast.error('Cannot sign out, please try again.');
-            });
+
+    const fallbackAvatar =
+        "https://ui-avatars.com/api/?name=User&background=10b981&color=ffffff";
+
+    const closeMenu = () => setIsMenuOpen(false);
+    const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+    useEffect(() => {
+        closeMenu();
+    }, [location.pathname]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!isMenuOpen) return;
+
+            const clickedInsideMenu = menuRef.current?.contains(event.target);
+            const clickedButton = buttonRef.current?.contains(event.target);
+
+            if (!clickedInsideMenu && !clickedButton) {
+                closeMenu();
+            }
+        };
+
+        const handleEscape = (event) => {
+            if (event.key === "Escape") closeMenu();
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleEscape);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscape);
+        };
+    }, [isMenuOpen]);
+
+    const handleSignOut = async () => {
+        try {
+            await signOutUser();
+            toast.success("Successfully signed out!");
+            closeMenu();
+            navigate("/");
+        } catch {
+            toast.error("Cannot sign out, please try again.");
+        }
     };
 
-    const links = (
+    const navLinkClass = ({ isActive }) =>
+        ["navbar-link", isActive ? "navbar-link-active" : "navbar-link-inactive"].join(" ");
+
+    const mobileNavLinkClass = ({ isActive }) =>
+        [
+            "mobile-navbar-link",
+            isActive ? "mobile-navbar-link-active" : "mobile-navbar-link-inactive",
+        ].join(" ");
+
+    const mainLinks = (
         <>
-            <li><NavLink to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Home</NavLink></li>
-            <li><NavLink to="/allItems" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Lost & Found Items</NavLink></li>
-            <li><NavLink to="/aboutUs" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition">About Us</NavLink></li>
-            <li><NavLink to="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Contact</NavLink></li>
+            <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+            <li><NavLink to="/allItems" className={navLinkClass}>Lost &amp; Found Items</NavLink></li>
+            <li><NavLink to="/aboutUs" className={navLinkClass}>About Us</NavLink></li>
+            <li><NavLink to="/contact" className={navLinkClass}>Contact</NavLink></li>
+        </>
+    );
+
+    const mobileMainLinks = (
+        <>
+            <li><NavLink to="/" className={mobileNavLinkClass} onClick={closeMenu}>Home</NavLink></li>
+            <li><NavLink to="/allItems" className={mobileNavLinkClass} onClick={closeMenu}>Lost &amp; Found Items</NavLink></li>
+            <li><NavLink to="/aboutUs" className={mobileNavLinkClass} onClick={closeMenu}>About Us</NavLink></li>
+            <li><NavLink to="/contact" className={mobileNavLinkClass} onClick={closeMenu}>Contact</NavLink></li>
         </>
     );
 
     return (
-        <div className="sticky top-0 z-50 glass-liquid-premium border-b border-emerald-200/40 dark:border-emerald-500/20 px-3 lg:px-8 shadow-sm">
-            <div className="navbar mx-auto">
-                {/* Navbar Start */}
-                <div className="navbar-start flex items-center" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-                    {/* Logo */}
-                    <img className="w-16 rounded-full shadow-md" src={logo} alt="Lost and Found Logo" />
-                    <span className="text-2xl font-bold ml-3 font-poppins gradient-text-green">Zetech Lost & Found</span>
-                </div>
+        <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4 lg:px-6">
+            <div className="navbar-shell mx-auto max-w-7xl">
+                <div className="navbar-glass">
+                    <div className="mx-auto flex min-h-[68px] items-center justify-between gap-3 px-4 sm:px-5 lg:px-6">
+                        <div
+                            className="flex min-w-0 cursor-pointer items-center gap-3"
+                            onClick={() => navigate("/")}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") navigate("/");
+                            }}
+                        >
+                            <div className="brand-logo-shell">
+                                <img
+                                    className="brand-logo-image"
+                                    src={logo}
+                                    alt="Zetech Lost and Found Logo"
+                                />
+                            </div>
 
-                {/* Navbar Center for Large Screens */}
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal space-x-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        {links}
-                    </ul>
-                </div>
-
-                {/* Navbar End */}
-                <div className="navbar-end flex items-center space-x-4">
-                    {user ? (
-                        // User is logged in - Show Profile Dropdown
-                        <div className="dropdown dropdown-end">
-                            <button
-                                tabIndex={0}
-                                className="btn btn-ghost btn-circle avatar hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition">
-                                <div className="w-10 rounded-full">
-                                    <img alt={user.email} title={user.displayName} src={user.photoURL} />
-                                </div>
-                            </button>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-sm dropdown-content glass-liquid-premium text-emerald-600 dark:text-emerald-400 rounded-box mt-3 w-52 shadow-lg border border-emerald-200/40 dark:border-emerald-500/20">
-                                {links}
-                                <li><Link to="/addItems" className="hover:text-emerald-700 dark:hover:text-emerald-300">Add Lost & Found Item</Link></li>
-                                <li><Link to="/allRecovered" className="hover:text-emerald-700 dark:hover:text-emerald-300">All Recovered Items</Link></li>
-                                <li><Link to="/myItems" className="hover:text-emerald-700 dark:hover:text-emerald-300">Manage My Items</Link></li>
-                                <li>
-                                    <button
-                                        onClick={handleSignOut}
-                                        className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white font-bold py-2 px-4 rounded-md hover:shadow-lg transition">
-                                        Sign Out
-                                    </button>
-                                </li>
-                            </ul>
+                            <div className="min-w-0 brand-text-wrap">
+                                <h1 className="brand-title">Zetech Lost &amp; Found</h1>
+                                <p className="brand-subtitle">Find, report, and recover items easily</p>
+                            </div>
                         </div>
-                    ) : (
-                        // User is not logged in - Show Hamburger Menu on Small Screens
-                        <div className="lg:hidden">
-                            <button
-                                className="btn btn-ghost btn-circle text-emerald-600 dark:text-emerald-400"
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="2"
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4 6h16M4 12h16m-7 6h7"
-                                    />
-                                </svg>
-                            </button>
 
-                            {/* Dropdown Menu */}
-                            {isMenuOpen && (
-                                <div className="absolute top-14 right-4 glass-liquid-premium rounded-lg shadow-lg z-50 w-48 border border-emerald-200/40 dark:border-emerald-500/20">
-                                    <ul className="menu menu-compact space-y-2 p-4 text-emerald-600 dark:text-emerald-400">
-                                        {links}
-                                        <li>
-                                            <NavLink
-                                                to="/register"
-                                                className="block bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg transition"
+                        <nav className="hidden lg:block">
+                            <div className="nav-pill">
+                                <ul className="flex items-center gap-1">{mainLinks}</ul>
+                            </div>
+                        </nav>
+
+                        <div className="flex items-center gap-2 sm:gap-3">
+                            {user ? (
+                                <>
+                                    <div className="hidden lg:flex items-center gap-3">
+                                        <Link to="/addItems" className="apple-btn apple-btn-secondary">
+                                            Add Item
+                                        </Link>
+
+                                        <div className="dropdown dropdown-end">
+                                            <button tabIndex={0} className="apple-profile-btn">
+                                                <div className="h-10 w-10 overflow-hidden rounded-full">
+                                                    <img
+                                                        src={user?.photoURL || fallbackAvatar}
+                                                        alt={user?.displayName || user?.email || "User profile"}
+                                                        className="h-full w-full object-cover"
+                                                    />
+                                                </div>
+                                                <span className="hidden max-w-[120px] truncate text-sm xl:block">
+                                                    {user?.displayName || "My Account"}
+                                                </span>
+                                            </button>
+
+                                            <ul
+                                                tabIndex={0}
+                                                className="dropdown-glass menu menu-sm dropdown-content mt-3 w-64 rounded-2xl p-3 shadow-xl"
                                             >
-                                                Sign Up
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink
-                                                to="/signin"
-                                                className="block bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg transition"
+                                                <li className="mb-2 px-3 py-2">
+                                                    <div className="flex flex-col items-start gap-1">
+                                                        <span className="text-sm font-semibold text-slate-800 dark:text-white">
+                                                            {user?.displayName || "User"}
+                                                        </span>
+                                                        <span className="max-w-full truncate text-xs text-slate-500 dark:text-slate-400">
+                                                            {user?.email}
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                                <li><Link to="/addItems">Add Lost &amp; Found Item</Link></li>
+                                                <li><Link to="/allRecovered">All Recovered Items</Link></li>
+                                                <li><Link to="/myItems">Manage My Items</Link></li>
+                                                <li className="mt-2">
+                                                    <button onClick={handleSignOut} className="apple-btn apple-btn-primary w-full">
+                                                        Sign Out
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div className="relative lg:hidden">
+                                        <button
+                                            ref={buttonRef}
+                                            onClick={toggleMenu}
+                                            className="mobile-icon-btn"
+                                            aria-label="Toggle menu"
+                                            aria-expanded={isMenuOpen}
+                                            aria-controls="mobile-menu"
+                                        >
+                                            <div className="h-9 w-9 overflow-hidden rounded-full">
+                                                <img
+                                                    src={user?.photoURL || fallbackAvatar}
+                                                    alt={user?.displayName || user?.email || "User profile"}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            </div>
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="hidden lg:flex items-center gap-3">
+                                        <NavLink to="/register" className="apple-btn apple-btn-secondary">
+                                            Sign Up
+                                        </NavLink>
+                                        <NavLink to="/signin" className="apple-btn apple-btn-primary">
+                                            Sign In
+                                        </NavLink>
+                                    </div>
+
+                                    <div className="relative lg:hidden">
+                                        <button
+                                            ref={buttonRef}
+                                            onClick={toggleMenu}
+                                            className="mobile-icon-btn"
+                                            aria-label="Toggle navigation menu"
+                                            aria-expanded={isMenuOpen}
+                                            aria-controls="mobile-menu"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth="2.2"
+                                                stroke="currentColor"
+                                                className="h-5 w-5 text-slate-800 dark:text-white"
                                             >
-                                                Sign In
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
+                                                {isMenuOpen ? (
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12"
+                                                    />
+                                                ) : (
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M4 6h16M4 12h16m-16 6h16"
+                                                    />
+                                                )}
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </>
                             )}
                         </div>
-                    )}
-
-                    {/* Sign Up/Sign In for Large Screens */}
-                    {!user && (
-                        <div className="hidden lg:flex space-x-4">
-                            <NavLink
-                                to="/register"
-                                className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white font-bold py-2 px-5 rounded-md hover:shadow-lg transition text-[0.8rem]"
-                            >
-                                Sign Up
-                            </NavLink>
-                            <NavLink
-                                to="/signin"
-                                className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white font-bold py-2 px-5 rounded-md hover:shadow-lg transition text-[0.8rem]"
-                            >
-                                Sign In
-                            </NavLink>
-                        </div>
-                    )}
+                    </div>
                 </div>
             </div>
-        </div>
+
+            {isMenuOpen && (
+                <div className="relative lg:hidden">
+                    <div
+                        id="mobile-menu"
+                        ref={menuRef}
+                        className="mobile-menu-glass animate-fade-in mx-1 mt-3 rounded-2xl p-4 shadow-xl"
+                    >
+                        {user ? (
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-3 rounded-2xl bg-white/50 p-3 dark:bg-white/5">
+                                    <div className="h-12 w-12 overflow-hidden rounded-full">
+                                        <img
+                                            src={user?.photoURL || fallbackAvatar}
+                                            alt={user?.displayName || user?.email || "User profile"}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="truncate text-sm font-semibold text-slate-800 dark:text-white">
+                                            {user?.displayName || "User"}
+                                        </p>
+                                        <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+                                            {user?.email}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <ul className="space-y-1">{mobileMainLinks}</ul>
+
+                                <div className="h-px bg-black/5 dark:bg-white/10" />
+
+                                <ul className="space-y-1">
+                                    <li><NavLink to="/addItems" className={mobileNavLinkClass} onClick={closeMenu}>Add Lost &amp; Found Item</NavLink></li>
+                                    <li><NavLink to="/allRecovered" className={mobileNavLinkClass} onClick={closeMenu}>All Recovered Items</NavLink></li>
+                                    <li><NavLink to="/myItems" className={mobileNavLinkClass} onClick={closeMenu}>Manage My Items</NavLink></li>
+                                </ul>
+
+                                <button onClick={handleSignOut} className="apple-btn apple-btn-primary w-full">
+                                    Sign Out
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="space-y-4">
+                                <ul className="space-y-1">{mobileMainLinks}</ul>
+
+                                <div className="h-px bg-black/5 dark:bg-white/10" />
+
+                                <div className="grid grid-cols-1 gap-3">
+                                    <NavLink
+                                        to="/register"
+                                        className="apple-btn apple-btn-secondary justify-center"
+                                        onClick={closeMenu}
+                                    >
+                                        Sign Up
+                                    </NavLink>
+                                    <NavLink
+                                        to="/signin"
+                                        className="apple-btn apple-btn-primary justify-center"
+                                        onClick={closeMenu}
+                                    >
+                                        Sign In
+                                    </NavLink>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </header>
     );
 };
 
