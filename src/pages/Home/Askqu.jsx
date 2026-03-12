@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { FaChevronDown, FaShieldAlt, FaUserCheck, FaBell } from 'react-icons/fa';
 
 const Askqu = () => {
@@ -81,31 +80,21 @@ const Askqu = () => {
     };
 
     return (
-        <div className="py-12 px-4 bg-white">
+        <div className="py-12 px-4 bg-white dark:bg-slate-950">
             <div className="max-w-5xl mx-auto">
                 {/* Header with Logo */}
-                <motion.div 
-                    className="text-center mb-12"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                >
+                <div className="text-center mb-12">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <img src="/zetech-logo.svg" alt="Zetech" className="h-10 w-10 object-contain" />
-                        <h1 className="text-3xl md:text-4xl font-bold text-zetech-dark">FAQs</h1>
+                        <h1 className="text-3xl md:text-4xl font-bold gradient-text-green">FAQs</h1>
                     </div>
-                    <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Find answers to common questions about reporting and claiming items
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Category Tabs */}
-                <motion.div 
-                    className="flex flex-wrap justify-center gap-2 mb-10"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                >
+                <div className="flex flex-wrap justify-center gap-2 mb-10">
                     {categories.map((category) => {
                         const Icon = category.icon;
                         return (
@@ -117,8 +106,8 @@ const Askqu = () => {
                                 }}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                                     activeCategory === category.id
-                                        ? 'bg-zetech-primary text-white shadow-sm'
-                                        : 'bg-gray-100 text-zetech-primary hover:bg-gray-200'
+                                        ? 'bg-emerald-500 text-white shadow-sm'
+                                        : 'bg-gray-100 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 hover:bg-gray-200 dark:hover:bg-slate-700'
                                 }`}
                             >
                                 <Icon className="text-base" />
@@ -126,71 +115,54 @@ const Askqu = () => {
                             </button>
                         );
                     })}
-                </motion.div>
+                </div>
 
                 {/* FAQ Items */}
                 <div className="space-y-2">
                     {faqs[activeCategory].map((item, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.2 }}
                             className="group"
                         >
                             <button
                                 onClick={() => setExpandedItem(expandedItem === index ? -1 : index)}
-                                className="w-full text-left p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-zetech-primary"
+                                className="w-full text-left p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-emerald-500"
                             >
                                 <div className="flex items-start justify-between gap-3">
-                                    <h3 className="text-base font-semibold text-zetech-dark group-hover:text-zetech-primary transition-colors">
+                                    <h3 className="text-base font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                         {item.question}
                                     </h3>
-                                    <motion.div
-                                        animate={{ rotate: expandedItem === index ? 180 : 0 }}
-                                        transition={{ duration: 0.15 }}
-                                        className="flex-shrink-0"
-                                    >
-                                        <FaChevronDown className="text-zetech-primary text-base" />
-                                    </motion.div>
+                                    <div className="flex-shrink-0 transition-transform duration-150" style={{transform: expandedItem === index ? 'rotate(180deg)' : 'rotate(0deg)'}}>
+                                        <FaChevronDown className="text-emerald-500 text-base" />
+                                    </div>
                                 </div>
                             </button>
 
-                            <motion.div
-                                initial={false}
-                                animate={{
-                                    height: expandedItem === index ? 'auto' : 0,
-                                    opacity: expandedItem === index ? 1 : 0
-                                }}
-                                transition={{ duration: 0.15 }}
-                                className="overflow-hidden"
+                            <div
+                                className="overflow-hidden transition-all duration-150"
+                                style={{maxHeight: expandedItem === index ? '500px' : '0px', opacity: expandedItem === index ? 1 : 0}}
                             >
-                                <div className="px-4 py-3 bg-zetech-light text-sm text-gray-700 border-l-4 border-zetech-secondary rounded-b-lg">
+                                <div className="px-4 py-3 bg-emerald-50 dark:bg-slate-700 text-sm text-gray-700 dark:text-gray-200 border-l-4 border-emerald-500 rounded-b-lg">
                                     {item.answer}
                                 </div>
-                            </motion.div>
-                        </motion.div>
+                            </div>
+                        </div>
                     ))}
                 </div>
 
                 {/* Contact CTA */}
-                <motion.div 
-                    className="mt-10 p-6 bg-zetech-primary rounded-lg text-white text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.25 }}
-                >
+                <div className="mt-10 p-6 bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 rounded-lg text-white text-center">
                     <h3 className="text-lg font-bold mb-2">Didn't find your answer?</h3>
-                    <p className="mb-3 text-sm text-blue-100">Contact our support team</p>
+                    <p className="mb-3 text-sm text-emerald-100">Contact our support team</p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a href="/contact" className="px-5 py-2 bg-white text-zetech-primary rounded-lg font-semibold text-sm hover:bg-zetech-light transition-colors">
+                        <a href="/contact" className="px-5 py-2 bg-white text-emerald-600 rounded-lg font-semibold text-sm hover:bg-emerald-50 transition-colors">
                             Contact Support
                         </a>
-                        <a href="mailto:support@zetech.ac.ke" className="px-5 py-2 border border-white text-white rounded-lg font-semibold text-sm hover:bg-zetech-accent transition-colors">
+                        <a href="mailto:support@zetech.ac.ke" className="px-5 py-2 border border-white text-white rounded-lg font-semibold text-sm hover:bg-white/10 transition-colors">
                             Email Us
                         </a>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

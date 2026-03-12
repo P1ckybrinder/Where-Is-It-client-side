@@ -27,7 +27,8 @@
   }
 
   html[data-theme="dark"] body {
-    @apply bg-slate-950 text-white;
+    @apply text-white;
+    background-color: #0f172a;
   }
 }
 
@@ -42,11 +43,11 @@
   }
 
   html[data-theme="light"] .glass-card-default {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.85);
     border-color: rgba(16, 185, 129, 0.35);
     box-shadow: 
       0 8px 32px rgba(16, 185, 129, 0.12),
-      inset 0 1px 2px rgba(255, 255, 255, 0.9),
+      inset 0 1px 2px rgba(255, 255, 255, 0.95),
       inset 0 -8px 16px rgba(16, 185, 129, 0.04);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -330,7 +331,7 @@
 
   /* Liquid Glass Premium - Enhanced */
   html[data-theme="light"] .glass-liquid-premium {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1.5px solid rgba(16, 185, 129, 0.35);
     border-radius: 24px;
     box-shadow: 
@@ -429,7 +430,7 @@
   /* Standard Glass Morphism */
   html[data-theme="light"] .glass-morphism {
     @apply backdrop-blur-2xl border rounded-2xl;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.88);
     border-color: rgba(16, 185, 129, 0.3);
     box-shadow: 
       0 8px 32px rgba(16, 185, 129, 0.1),
@@ -569,14 +570,10 @@
   }
 }
 
-/* Theme-Aware Glass Components */
-@layer components {
-  /* Glass Card Variants */
-  .glass-card-default {
-    @apply rounded-2xl border transition-colors duration-200;
-    position: relative;
-    overflow: hidden;
-  }
+/* Smooth Scroll Behavior */
+html {
+  @apply scroll-smooth;
+}
 
   html[data-theme="light"] .glass-card-default {
     background-color: rgba(255, 255, 255, 0.65);
