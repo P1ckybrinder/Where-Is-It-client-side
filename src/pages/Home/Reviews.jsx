@@ -90,10 +90,10 @@ const Reviews = () => {
             {/* Header Section */}
             <motion.div
                 className="text-center mb-12"
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.3 }}
             >
                 <h2 className="text-3xl md:text-4xl font-bold gradient-text-green mb-3">Student Testimonials</h2>
                 <p className="text-slate-600 dark:text-slate-400 font-semibold text-lg">
@@ -122,7 +122,7 @@ const Reviews = () => {
                                 <div className="flex flex-col h-full">
                                     {/* Header with Name */}
                                     <div className="mb-4">
-                                        <h3 className="text-xl md:text-2xl font-bold text-zetech-primary dark:text-zetech-accent mb-2">
+                                        <h3 className="text-xl md:text-2xl font-bold text-cyan-600 dark:text-cyan-400 mb-2">
                                             {review.name}
                                         </h3>
                                         <StarRating rating={review.rating} />
@@ -173,10 +173,10 @@ const Reviews = () => {
                         onClick={() => setCurrentIndex(idx * cardsPerSlide)}
                         className={`w-2 h-2 rounded-full transition-all ${
                             Math.floor(currentIndex / cardsPerSlide) === idx
-                                ? 'bg-zetech-primary w-8'
+                                ? 'bg-cyan-500 w-8'
                                 : 'bg-slate-300 dark:bg-slate-600'
                         }`}
-                        whileHover={{ scale: 1.2 }}
+                        whileHover={{ scale: 1.05 }}
                     />
                 ))}
             </div>
@@ -187,7 +187,7 @@ const Reviews = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.15, duration: 0.3 }}
             >
                 <Link to="/addReview">
                     <motion.button

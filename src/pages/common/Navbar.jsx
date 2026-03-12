@@ -54,8 +54,8 @@ const Navbar = () => {
                         className={({ isActive }) => `
                             transition-colors duration-200
                             ${isActive 
-                                ? 'text-zetech-primary dark:text-zetech-accent font-bold' 
-                                : 'text-slate-700 dark:text-slate-300 hover:text-zetech-primary dark:hover:text-zetech-accent'
+                                ? 'text-cyan-600 dark:text-cyan-400 font-bold' 
+                                : 'text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400'
                             }
                         `}
                     >
@@ -84,7 +84,7 @@ const Navbar = () => {
                         />
                         <div className="flex flex-col">
                             <span className="text-2xl font-bold gradient-text-green">{schoolConfig.name}</span>
-                            <span className="text-xs text-zetech-accent dark:text-zetech-secondary">{schoolConfig.slogan}</span>
+                            <span className="text-xs text-cyan-400 dark:text-cyan-300">{schoolConfig.slogan}</span>
                         </div>
                     </motion.div>
 
@@ -95,13 +95,13 @@ const Navbar = () => {
                                 <li key={link.to}>
                                     <NavLink 
                                         to={link.to}
-                                        className={({ isActive }) => `
-                                            px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                                            ${isActive 
-                                                ? 'bg-zetech-primary/10 dark:bg-zetech-accent/10 text-zetech-primary dark:text-zetech-accent' 
-                                                : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-                                            }
-                                        `}
+                                    className={({ isActive }) => `
+                                        px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                                        ${isActive 
+                                            ? 'bg-cyan-500/10 dark:bg-cyan-400/10 text-cyan-600 dark:text-cyan-400' 
+                                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                        }
+                                    `}
                                     >
                                         {link.label}
                                     </NavLink>
@@ -137,7 +137,7 @@ const Navbar = () => {
                                     <img 
                                         alt={user.displayName} 
                                         src={user.photoURL} 
-                                        className="w-10 h-10 rounded-full object-cover border-2 border-zetech-primary"
+                                        className="w-10 h-10 rounded-full object-cover border-2 border-cyan-500"
                                     />
                                     <span className="text-sm font-semibold hidden lg:inline max-w-24 truncate">
                                         {user.displayName?.split(' ')[0]}
@@ -161,7 +161,7 @@ const Navbar = () => {
                                                 onClick={() => navigate('/admin')}
                                             >
                                                 <button className="w-full flex items-center gap-3 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
-                                                    <FaShieldAlt className="text-zetech-primary dark:text-zetech-accent" />
+                                                    <FaShieldAlt className="text-cyan-600 dark:text-cyan-400" />
                                                     <span className="text-sm font-medium">Admin Dashboard</span>
                                                 </button>
                                             </motion.div>
@@ -209,16 +209,16 @@ const Navbar = () => {
                         {/* Mobile Menu / Auth Buttons */}
                         <div className="lg:hidden">
                             {user ? (
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
-                                >
-                                    <img 
-                                        alt={user.displayName} 
-                                        src={user.photoURL} 
-                                        className="w-10 h-10 rounded-full object-cover border-2 border-zetech-primary"
-                                    />
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                            >
+                                <img 
+                                    alt={user.displayName} 
+                                    src={user.photoURL} 
+                                    className="w-10 h-10 rounded-full object-cover border-2 border-cyan-500"
+                                />
                                 </motion.button>
                             ) : (
                                 <GlassButton 
@@ -269,7 +269,7 @@ const Navbar = () => {
                                     className={({ isActive }) => `
                                         px-4 py-2 rounded-lg transition-all font-medium
                                         ${isActive 
-                                            ? 'bg-zetech-primary text-white' 
+                                            ? 'bg-cyan-500/10 text-cyan-600 dark:bg-cyan-400/10 dark:text-cyan-400' 
                                             : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                                         }
                                     `}
@@ -284,12 +284,12 @@ const Navbar = () => {
                                 {isAdmin && (
                                     <button 
                                         onClick={() => { navigate('/admin'); setIsMenuOpen(false); }}
-                                        className="w-full flex items-center gap-2 px-4 py-2 bg-zetech-primary/10 text-zetech-primary dark:bg-zetech-accent/10 dark:text-zetech-accent rounded-lg font-medium"
+                                        className="w-full flex items-center gap-2 px-4 py-2 bg-cyan-500/10 text-cyan-600 dark:bg-cyan-400/10 dark:text-cyan-400 rounded-lg font-medium"
                                     >
                                         <FaShieldAlt /> Admin
                                     </button>
                                 )}
-                                <NavLink to="/addItems" className="w-full block px-4 py-2 bg-zetech-primary text-white rounded-lg font-medium text-center">
+                                <NavLink to="/addItems" className="w-full block px-4 py-2 bg-cyan-500 text-white rounded-lg font-medium text-center">
                                     + Add Item
                                 </NavLink>
                                 <button 
@@ -304,7 +304,7 @@ const Navbar = () => {
                                 <NavLink to="/register" className="flex-1 px-4 py-2 bg-slate-200 dark:bg-slate-800 text-center rounded-lg font-medium">
                                     Sign Up
                                 </NavLink>
-                                <NavLink to="/signin" className="flex-1 px-4 py-2 bg-zetech-primary text-white text-center rounded-lg font-medium">
+                                <NavLink to="/signin" className="flex-1 px-4 py-2 bg-cyan-500 text-white text-center rounded-lg font-medium">
                                     Sign In
                                 </NavLink>
                             </div>
