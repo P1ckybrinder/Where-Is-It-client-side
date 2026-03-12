@@ -1,121 +1,138 @@
 import React from 'react';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { motion } from 'framer-motion';
 import { schoolConfig } from '../../config/schoolConfig';
-import { FaSearch, FaShieldAlt, FaBell, FaHandsHelping } from 'react-icons/fa';
 
 const Banner = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    cssEase: 'ease-in-out',
-  };
-
-  const slides = [
-    {
-      title: `Lost Something? Find It Here!`,
-      description: `Join ${schoolConfig.name}'s community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.`,
-      icon: FaSearch,
-      ctaText: 'Report Lost Item',
-      ctaLink: '/addItems'
-    },
-    {
-      title: "Helping You Recover What Matters",
-      description: `If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.`,
-      icon: FaHandsHelping,
-      ctaText: 'Report Found Item',
-      ctaLink: '/addItems'
-    },
-    {
-      title: "Secure & Verified Process",
-      description: `Your privacy matters. Our security system ensures all claims are verified before item release, maintaining trust in our community.`,
-      icon: FaShieldAlt,
-      ctaText: 'Learn More',
-      ctaLink: '/aboutUs'
-    },
-    {
-      title: "Get Notified Instantly",
-      description: `Enable notifications to receive real-time alerts when someone finds items matching your lost item report. Never miss a match!`,
-      icon: FaBell,
-      ctaText: 'Configure Alerts',
-      ctaLink: '/settings/notifications'
-    },
-  ];
+  // Placeholder illustration SVG component
+  const IllustrationCard = () => (
+    <motion.div
+      className="relative w-full max-w-sm h-60"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+    >
+      <div className="glass-liquid-premium p-8 w-full h-full flex items-center justify-center rounded-3xl">
+        <svg className="w-full h-full" viewBox="0 0 300 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Background circle */}
+          <circle cx="150" cy="120" r="100" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+          
+          {/* Person sitting at desk */}
+          <rect x="100" y="110" width="100" height="60" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="130" cy="95" r="12" fill="rgba(255,255,255,0.8)"/>
+          <rect x="115" y="110" width="30" height="50" fill="rgba(255,255,255,0.7)"/>
+          <rect x="150" y="120" width="40" height="40" fill="rgba(255,255,255,0.6)" rx="4"/>
+          
+          {/* Network nodes */}
+          <circle cx="80" cy="50" r="6" fill="rgba(16,185,129,0.8)"/>
+          <circle cx="150" cy="20" r="6" fill="rgba(16,185,129,0.8)"/>
+          <circle cx="220" cy="50" r="6" fill="rgba(16,185,129,0.8)"/>
+          <circle cx="240" cy="120" r="6" fill="rgba(16,185,129,0.8)"/>
+          
+          {/* Connection lines */}
+          <line x1="80" y1="50" x2="150" y2="20" stroke="rgba(110,231,183,0.5)" strokeWidth="2"/>
+          <line x1="150" y1="20" x2="220" y2="50" stroke="rgba(110,231,183,0.5)" strokeWidth="2"/>
+          <line x1="220" y1="50" x2="240" y2="120" stroke="rgba(110,231,183,0.5)" strokeWidth="2"/>
+          <line x1="130" y1="110" x2="220" y2="50" stroke="rgba(110,231,183,0.3)" strokeWidth="1" strokeDasharray="3,3"/>
+        </svg>
+      </div>
+    </motion.div>
+  );
 
   return (
-    <div className="container mx-auto my-8 glass-morphism overflow-hidden rounded-3xl">
-      <Slider {...settings} className="slick-slider-custom">
-        {slides.map((slide, index) => {
-          const Icon = slide.icon;
-          return (
-            <div key={index} className="p-8 h-96 bg-gradient-to-br from-zetech-dark via-zetech-primary to-zetech-accent rounded-3xl relative overflow-hidden group">
-              {/* Animated Background Elements */}
-              <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-zetech-accent rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
-              </div>
+    <div className="container mx-auto my-8 px-4">
+      <motion.div
+        className="relative w-full overflow-hidden rounded-3xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Premium Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-zetech-dark via-slate-800 to-zetech-primary rounded-3xl opacity-90"/>
+        
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-zetech-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"/>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-zetech-primary rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{animationDelay: '2s'}}/>
+        </div>
 
-              <motion.div
-                className="flex flex-col md:flex-row justify-between items-center h-full gap-8 relative z-10"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Left Content */}
-                <div className="w-full md:w-1/2 text-white">
-                  <motion.div
-                    className="flex items-center gap-3 mb-4"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
-                  >
-                    <Icon className="text-4xl text-zetech-accent" />
-                    <h2 className="text-3xl md:text-4xl font-bold">{slide.title}</h2>
-                  </motion.div>
+        {/* Glass Effect Overlay */}
+        <div className="absolute inset-0 glass-liquid-premium pointer-events-none rounded-3xl"/>
 
-                  <motion.p 
-                    className="text-base md:text-lg text-white/90 mb-6 leading-relaxed"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                  >
-                    {slide.description}
-                  </motion.p>
+        {/* Content */}
+        <div className="relative z-10 px-8 md:px-12 py-12 md:py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+            
+            {/* Left Content */}
+            <motion.div
+              className="w-full md:w-1/2 text-white"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-glass-light leading-tight">
+                Lost? Found? Let's Connect!
+              </h1>
+              
+              <p className="text-base md:text-lg text-white/85 mb-6 leading-relaxed">
+                Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home across {schoolConfig.name}.
+              </p>
 
-                  <motion.a
-                    href={slide.ctaLink}
-                    className="glass-button inline-block"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                  >
-                    {slide.ctaText}
-                  </motion.a>
-                </div>
-
-                {/* Right Icon */}
-                <motion.div
-                  className="w-full md:w-1/2 flex justify-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <motion.a
+                  href="/addItems"
+                  className="glass-button text-center px-8 py-3 font-semibold rounded-xl"
+                  whileHover={{ scale: 1.05, boxShadow: '0 12px 30px rgba(16, 185, 129, 0.5)' }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <div className="glass-morphism p-12 rounded-3xl hover-glow">
-                    <Icon className="text-8xl text-white opacity-80 mx-auto" />
-                  </div>
-                </motion.div>
-              </motion.div>
+                  Report Item
+                </motion.a>
+                <motion.a
+                  href="/allItems"
+                  className="px-8 py-3 font-semibold rounded-xl border-2 border-white/40 text-white backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all text-center"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.6)' }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Browse Items
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Right Illustration with Glass Effect */}
+            <div className="w-full md:w-1/2 flex justify-center">
+              <IllustrationCard />
             </div>
-          );
-        })}
-      </Slider>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Floating Stats Cards */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        {[
+          { label: 'Items Reunited', value: '1,200+' },
+          { label: 'Active Users', value: '500+' },
+          { label: 'Success Rate', value: '85%' },
+          { label: 'Campus Locations', value: '20+' }
+        ].map((stat, index) => (
+          <motion.div
+            key={index}
+            className="glass-liquid-premium p-4 md:p-6 rounded-2xl text-center"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
+          >
+            <p className="text-white/90 text-sm md:text-base font-semibold text-glass-light">
+              {stat.value}
+            </p>
+            <p className="text-white/60 text-xs md:text-sm mt-1">
+              {stat.label}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 };

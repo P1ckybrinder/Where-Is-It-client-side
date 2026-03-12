@@ -15,8 +15,71 @@
   }
 }
 
-/* Liquid Glass Component - Reusable */
+/* Premium Liquid Glass Morphism - ChatGPT Style */
 @layer components {
+  /* Ultra-premium glass container */
+  .glass-liquid-premium {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px;
+    box-shadow: 
+      0 0 40px rgba(16, 185, 129, 0.15),
+      inset 0 1px 2px rgba(255, 255, 255, 0.3),
+      inset 0 -32px 64px rgba(16, 185, 129, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-liquid-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+  }
+
+  .glass-liquid-premium::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(16, 185, 129, 0.2) 100%
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Animated glass card with premium effects */
+  .glass-card-premium {
+    @apply glass-liquid-premium p-8 transition-all duration-500;
+    animation: glassFloat 6s ease-in-out infinite;
+  }
+
+  .glass-card-premium:hover {
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 
+      0 0 60px rgba(16, 185, 129, 0.25),
+      inset 0 1px 2px rgba(255, 255, 255, 0.4),
+      inset 0 -32px 64px rgba(16, 185, 129, 0.15);
+  }
+
+  /* Standard glass morphism */
   .glass-morphism {
     @apply backdrop-blur-lg bg-white/10 border border-white/30 rounded-2xl;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
@@ -74,14 +137,15 @@
   }
 }
 
-/* Animations */
+/* Premium Animations */
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
+  @keyframes glassFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   @keyframes fadeIn {
@@ -104,6 +168,27 @@
     }
   }
 
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 200% center;
+    }
+    50% {
+      background-position: -200% center;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
   /* Hover Glow Effect */
   .hover-glow {
     @apply transition-all duration-300;
@@ -112,4 +197,13 @@
   .hover-glow:hover {
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
   }
+
+  /* Glass text effect */
+  .text-glass-light {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 0 20px rgba(16, 185, 129, 0.2);
+  }
 }
+
