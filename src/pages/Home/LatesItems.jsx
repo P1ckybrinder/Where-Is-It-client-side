@@ -22,14 +22,14 @@ const LatestItems = () => {
         <div className="container mx-auto px-6 py-8">
             {/* Header Section */}
             <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">Latest Items on Campus</h2>
-                <p className="text-gray-600 dark:text-gray-400 font-semibold">Check out the most recently reported lost & found items!</p>
+                <h2 className="text-3xl font-bold text-zetech-primary">Latest Items on Campus</h2>
+                <p className="text-gray-600 font-semibold">Check out the most recently reported lost & found items!</p>
             </div>
 
             {/* Loader */}
             {loading ? (
                 <div className="flex justify-center items-center min-h-[200px]">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-emerald-500 border-solid"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-zetech-primary border-solid"></div>
                 </div>
             ) : (
                 <>
@@ -39,7 +39,7 @@ const LatestItems = () => {
                             items.map((item) => <ItemsCard key={item._id} item={item} />)
                         ) : (
                             <p className="text-center text-gray-500 col-span-full text-lg font-medium">
-                                No items available.
+                                No items reported yet.
                             </p>
                         )}
                     </div>
@@ -47,8 +47,8 @@ const LatestItems = () => {
                     {/* Footer Section */}
                     <div className="text-center">
                         <Link to="/allItems">
-                            <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-150 focus:outline-none font-semibold">
-                                See More Items
+                            <button className="bg-zetech-primary text-white px-6 py-2 rounded-lg shadow-lg hover:bg-zetech-accent hover:shadow-xl transition-transform transform hover:scale-105 focus:outline-none">
+                                See All Items
                             </button>
                         </Link>
                     </div>

@@ -1,51 +1,106 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaCheckCircle, FaClock } from 'react-icons/fa';
+import { GlassCard, GlassButton } from '../../components/glass';
 
-const ItemsCard = ({ item }) => {
-  const { itemType, title, description, image } = item;
+const ItemsCard = ({ item, delay = 0 }) => {
+  const { itemType, title, description, image, verificationStatus, _id } = item;
   const navigate = useNavigate();
+  
+  const isVerified = verificationStatus === 'verified';
 
   return (
-    <div
-      className="glass-liquid-premium rounded-2xl overflow-hidden border border-emerald-400/40 dark:border-emerald-500/20 flex flex-col p-4 hover-glow group transition-all duration-150"
+    <GlassCard
+      variant="interactive"
+      delay={delay}
+      className="overflow-hidden flex flex-col h-full"
+      onClick={() => navigate(`/items/${_id}`)}
     >
-      {/* Image Section with Tag */}
-      <figure className="rounded-xl overflow-hidden relative h-40 mb-3 shadow-lg">
-        <img
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+      {/* Image Section with Tags */}
+      <div className="relative h-40 md:h-48 overflow-hidden rounded-t-2xl mb-4 -m-6 mb-4">
+        <motion.img
+          className="w-full h-full object-cover"
           src={image || 'https://via.placeholder.com/300'}
           alt={title}
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/300';
           }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         />
-        {/* Item Type Tag - Green/Glass Style */}
-        <div className="absolute top-2 right-2 bg-emerald-500/90 dark:bg-emerald-600/80 backdrop-blur-md text-white px-3 py-1 text-xs font-semibold shadow-lg rounded-lg border border-emerald-400/50">
+        
+        {/* Item Type Badge */}
+        <motion.div
+          className={`absolute top-3 right-3 px-3 py-1 text-xs font-bold shadow-lg text-white rounded-full backdrop-blur-sm ${
+            itemType === 'Lost' 
+              ? 'bg-red-500/80' 
+              : itemType === 'Found' 
+              ? 'bg-green-500/80' 
+              : 'bg-zetech-primary/80'
+          }`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+        >
           {itemType}
-        </div>
-      </figure>
+        </motion.div>
+
+        {/* Verification Badge */}
+        <motion.div
+          className={`absolute top-3 left-3 px-3 py-1 text-xs font-bold shadow-lg rounded-full flex items-center gap-1 backdrop-blur-sm ${
+            isVerified 
+              ? 'bg-green-400/90 text-green-900' 
+              : 'bg-amber-400/90 text-amber-900'
+          }`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.15 }}
+        >
+          {isVerified ? <FaCheckCircle size={12} /> : <FaClock size={12} />}
+          <span>{isVerified ? 'Verified' : 'Pending'}</span>
+        </motion.div>
+      </div>
 
       {/* Card Content */}
       <div className="flex flex-col flex-grow">
         {/* Title */}
-        <h2 className="text-base md:text-lg font-bold text-slate-900 dark:text-white mb-2 line-clamp-2">
+        <motion.h2
+          className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 line-clamp-2"
+          whileHover={{ color: '#10b981' }}
+        >
           {title}
-        </h2>
+        </motion.h2>
 
         {/* Description */}
-        <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 line-clamp-2 flex-grow">
-          {description.slice(0, 60)}...
+        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 flex-grow">
+          {description}
         </p>
 
-        {/* Action Button - Green Gradient */}
-        <button
-          onClick={() => navigate(`/items/${item._id}`)}
-          className="mt-auto w-full bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white py-2 px-3 rounded-lg hover:shadow-lg font-semibold text-sm transition-all duration-150 will-change-shadow"
+        {/* Category Badge */}
+        <motion.div
+          className="glass-badge mb-4 w-fit"
+          whileHover={{ scale: 1.05 }}
         >
-          View Details
-        </button>
+          {item.category || 'Uncategorized'}
+        </motion.div>
+
+        {/* Action Button */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <GlassButton
+            onClick={() => navigate(`/items/${_id}`)}
+            variant="primary"
+            size="sm"
+            className="w-full"
+          >
+            View Details
+          </GlassButton>
+        </motion.div>
       </div>
-    </div>
+    </GlassCard>
   );
 };
 
