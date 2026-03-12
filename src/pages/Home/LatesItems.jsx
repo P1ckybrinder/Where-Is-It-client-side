@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import ItemsCard from './ItemsCard';
 
 const LatestItems = () => {
@@ -19,11 +20,31 @@ const LatestItems = () => {
     }, []);
 
     return (
-        <div className="container mx-auto px-6 py-8">
+        <div className="container mx-auto px-6 py-12">
             {/* Header Section */}
-            <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-zetech-primary">Latest Items on Campus</h2>
-                <p className="text-gray-600 font-semibold">Check out the most recently reported lost & found items!</p>
+            <div className="text-center mb-10">
+                <motion.h2 
+                  className="text-4xl md:text-5xl font-bold mb-3"
+                  initial={{ opacity: 0, y: -20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  style={{
+                    background: 'linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Latest Items on Campus
+                </motion.h2>
+                <motion.p 
+                  className="text-lg text-slate-600 dark:text-slate-400 font-medium"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  Check out the most recently reported lost & found items!
+                </motion.p>
             </div>
 
             {/* Loader */}
@@ -45,13 +66,22 @@ const LatestItems = () => {
                     </div>
 
                     {/* Footer Section */}
-                    <div className="text-center">
+                    <motion.div 
+                      className="text-center pt-4"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
                         <Link to="/allItems">
-                            <button className="bg-zetech-primary text-white px-6 py-2 rounded-lg shadow-lg hover:bg-zetech-accent hover:shadow-xl transition-transform transform hover:scale-105 focus:outline-none">
+                            <motion.button 
+                              className="glass-button-primary px-8 py-3 text-base font-semibold"
+                              whileHover={{ scale: 1.05, boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)' }}
+                              whileTap={{ scale: 0.98 }}
+                            >
                                 See All Items
-                            </button>
+                            </motion.button>
                         </Link>
-                    </div>
+                    </motion.div>
                 </>
             )}
         </div>
