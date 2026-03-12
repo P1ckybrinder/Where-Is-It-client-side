@@ -84,37 +84,55 @@ const AllItems = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    <GlassCard variant="elevated" className="p-6 sticky top-24">
-                        <h3 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">
-                            Categories
-                        </h3>
-                        <div className="space-y-2">
+                    <GlassCard variant="elevated" className="p-0 sticky top-24 overflow-hidden">
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-zetech-primary to-zetech-secondary px-6 py-5">
+                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                <span className="text-2xl">🏷️</span>
+                                Categories
+                            </h3>
+                        </div>
+
+                        {/* Categories List */}
+                        <div className="p-4 space-y-1.5">
                             <motion.button
                                 onClick={() => setSelectedCategory('')}
-                                whileHover={{ x: 4 }}
-                                className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all ${
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-between group ${
                                     !selectedCategory
-                                        ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
-                                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                        ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white shadow-md'
+                                        : 'text-slate-700 dark:text-slate-300 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
                                 }`}
                             >
-                                All Categories
+                                <span>All Categories</span>
+                                <span className={`text-sm font-medium ${!selectedCategory ? 'text-white/90' : 'text-slate-500'}`}>
+                                    {items.length}
+                                </span>
                             </motion.button>
 
-                            {categories.map((category) => (
+                            {categories.map((category, idx) => (
                                 <motion.button
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
-                                    whileHover={{ x: 4 }}
-                                    className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: idx * 0.05 }}
+                                    className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-between group ${
                                         selectedCategory === category
-                                            ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
-                                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                            ? 'bg-green-100 dark:bg-green-900/30 text-zetech-primary dark:text-green-300 border border-zetech-primary/30 shadow-sm'
+                                            : 'text-slate-700 dark:text-slate-300 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
                                     }`}
                                 >
-                                    {category}
-                                    <span className="text-xs ml-2 opacity-70">
-                                        ({items.filter(i => i.category === category).length})
+                                    <span className="capitalize">{category}</span>
+                                    <span className={`text-xs font-semibold px-2 py-1 rounded-full transition-all ${
+                                        selectedCategory === category
+                                            ? 'bg-zetech-primary text-white'
+                                            : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 group-hover:bg-zetech-primary group-hover:text-white'
+                                    }`}>
+                                        {items.filter(i => i.category === category).length}
                                     </span>
                                 </motion.button>
                             ))}
@@ -139,7 +157,7 @@ const AllItems = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                             {filteredItems.length > 0 ? (
                                 filteredItems.map((item, idx) => (
                                     <ItemsCard 
