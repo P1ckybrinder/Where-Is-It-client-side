@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaChevronDown, FaQuestionCircle, FaShieldAlt, FaUserCheck, FaBell, FaClock } from 'react-icons/fa';
+import { FaChevronDown, FaShieldAlt, FaUserCheck, FaBell } from 'react-icons/fa';
 
 const Askqu = () => {
     const [activeCategory, setActiveCategory] = useState('general');
     const [expandedItem, setExpandedItem] = useState(0);
 
     const categories = [
-        { id: 'general', label: 'Getting Started', icon: FaQuestionCircle },
+        { id: 'general', label: 'Getting Started', icon: FaShieldAlt },
         { id: 'security', label: 'Security & Privacy', icon: FaShieldAlt },
         { id: 'claims', label: 'Claiming Items', icon: FaUserCheck },
         { id: 'notifications', label: 'Notifications', icon: FaBell }
@@ -80,104 +80,81 @@ const Askqu = () => {
         ]
     };
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-    };
-
     return (
-        <div className="min-h-screen bg-gradient-to-b from-zetech-light to-white py-12 px-4">
+        <div className="py-12 px-4 bg-white">
             <div className="max-w-5xl mx-auto">
-                {/* Header */}
+                {/* Header with Logo */}
                 <motion.div 
                     className="text-center mb-12"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
                 >
                     <div className="flex items-center justify-center gap-3 mb-4">
-                        <FaQuestionCircle className="text-4xl text-zetech-primary" />
-                        <h1 className="text-4xl md:text-5xl font-bold text-zetech-dark">Frequently Asked Questions</h1>
+                        <img src="/zetech-logo.svg" alt="Zetech" className="h-10 w-10 object-contain" />
+                        <h1 className="text-3xl md:text-4xl font-bold text-zetech-dark">FAQs</h1>
                     </div>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Everything you need to know about reporting, claiming, and managing lost and found items on campus
+                    <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+                        Find answers to common questions about reporting and claiming items
                     </p>
                 </motion.div>
 
                 {/* Category Tabs */}
                 <motion.div 
-                    className="flex flex-wrap justify-center gap-3 mb-10"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="show"
+                    className="flex flex-wrap justify-center gap-2 mb-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.25 }}
                 >
                     {categories.map((category) => {
                         const Icon = category.icon;
                         return (
-                            <motion.button
+                            <button
                                 key={category.id}
                                 onClick={() => {
                                     setActiveCategory(category.id);
                                     setExpandedItem(0);
                                 }}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                                     activeCategory === category.id
-                                        ? 'bg-zetech-primary text-white shadow-lg scale-105'
-                                        : 'bg-white text-zetech-primary border-2 border-zetech-primary hover:shadow-lg'
+                                        ? 'bg-zetech-primary text-white shadow-sm'
+                                        : 'bg-gray-100 text-zetech-primary hover:bg-gray-200'
                                 }`}
-                                variants={itemVariants}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
                             >
-                                <Icon className="text-lg" />
+                                <Icon className="text-base" />
                                 <span className="hidden sm:inline">{category.label}</span>
-                            </motion.button>
+                            </button>
                         );
                     })}
                 </motion.div>
 
                 {/* FAQ Items */}
-                <motion.div 
-                    className="space-y-4"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="show"
-                >
+                <div className="space-y-2">
                     {faqs[activeCategory].map((item, index) => (
                         <motion.div
                             key={index}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.2 }}
                             className="group"
-                            variants={itemVariants}
-                            layout
                         >
-                            <motion.button
+                            <button
                                 onClick={() => setExpandedItem(expandedItem === index ? -1 : index)}
-                                className="w-full text-left p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-zetech-primary hover:border-zetech-secondary"
-                                whileHover={{ x: 5 }}
+                                className="w-full text-left p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-zetech-primary"
                             >
-                                <div className="flex items-start justify-between gap-4">
-                                    <div className="flex-1">
-                                        <h3 className="text-lg font-semibold text-zetech-dark group-hover:text-zetech-primary transition-colors">
-                                            {item.question}
-                                        </h3>
-                                    </div>
+                                <div className="flex items-start justify-between gap-3">
+                                    <h3 className="text-base font-semibold text-zetech-dark group-hover:text-zetech-primary transition-colors">
+                                        {item.question}
+                                    </h3>
                                     <motion.div
                                         animate={{ rotate: expandedItem === index ? 180 : 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="flex-shrink-0 mt-1"
+                                        transition={{ duration: 0.15 }}
+                                        className="flex-shrink-0"
                                     >
-                                        <FaChevronDown className="text-zetech-primary text-xl" />
+                                        <FaChevronDown className="text-zetech-primary text-base" />
                                     </motion.div>
                                 </div>
-                            </motion.button>
+                            </button>
 
                             <motion.div
                                 initial={false}
@@ -185,33 +162,31 @@ const Askqu = () => {
                                     height: expandedItem === index ? 'auto' : 0,
                                     opacity: expandedItem === index ? 1 : 0
                                 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.15 }}
                                 className="overflow-hidden"
                             >
-                                <div className="px-6 py-4 bg-zetech-light border-l-4 border-zetech-secondary rounded-b-lg">
-                                    <p className="text-gray-700 leading-relaxed">
-                                        {item.answer}
-                                    </p>
+                                <div className="px-4 py-3 bg-zetech-light text-sm text-gray-700 border-l-4 border-zetech-secondary rounded-b-lg">
+                                    {item.answer}
                                 </div>
                             </motion.div>
                         </motion.div>
                     ))}
-                </motion.div>
+                </div>
 
                 {/* Contact CTA */}
                 <motion.div 
-                    className="mt-12 p-8 bg-gradient-to-r from-zetech-primary to-zetech-accent rounded-lg text-white text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.6 }}
+                    className="mt-10 p-6 bg-zetech-primary rounded-lg text-white text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1, duration: 0.25 }}
                 >
-                    <h3 className="text-2xl font-bold mb-2">Didn't find your answer?</h3>
-                    <p className="mb-4 text-blue-100">Our support team is ready to help you 24/7</p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/contact" className="px-6 py-3 bg-white text-zetech-primary rounded-lg font-semibold hover:bg-zetech-light transition-colors">
+                    <h3 className="text-lg font-bold mb-2">Didn't find your answer?</h3>
+                    <p className="mb-3 text-sm text-blue-100">Contact our support team</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="/contact" className="px-5 py-2 bg-white text-zetech-primary rounded-lg font-semibold text-sm hover:bg-zetech-light transition-colors">
                             Contact Support
                         </a>
-                        <a href="mailto:support@zetech.ac.ke" className="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-zetech-primary transition-colors">
+                        <a href="mailto:support@zetech.ac.ke" className="px-5 py-2 border border-white text-white rounded-lg font-semibold text-sm hover:bg-zetech-accent transition-colors">
                             Email Us
                         </a>
                     </div>
