@@ -16,19 +16,19 @@ const ItemsCard = ({ item, delay = 0 }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -6 }}
-      className="cursor-pointer h-full flex flex-col overflow-hidden rounded-2xl border transition-all duration-300"
+      whileHover={{ y: -4 }}
+      className="cursor-pointer h-full flex flex-col overflow-hidden rounded-xl border transition-all duration-300"
       onClick={() => navigate(`/items/${_id}`)}
       style={{
-        background: 'rgba(255, 255, 255, 0.78)',
-        borderColor: 'rgba(255, 255, 255, 0.6)',
-        boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
+        background: 'rgba(255, 255, 255, 0.88)',
+        borderColor: 'rgba(16, 185, 129, 0.15)',
+        boxShadow: '0 4px 12px rgba(15, 23, 42, 0.06)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)'
       }}
     >
       {/* Image Section with Tags */}
-      <div className="relative h-40 md:h-48 overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex-shrink-0">
+      <div className="relative h-32 overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex-shrink-0">
         <motion.img
           className="w-full h-full object-cover"
           src={image || 'https://via.placeholder.com/300'}
@@ -36,13 +36,13 @@ const ItemsCard = ({ item, delay = 0 }) => {
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/300';
           }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.08 }}
           transition={{ duration: 0.3 }}
         />
         
         {/* Item Type Badge */}
         <motion.div
-          className={`absolute top-3 right-3 px-3 py-1.5 text-xs font-bold shadow-lg text-white rounded-full ${
+          className={`absolute top-2 right-2 px-2 py-1 text-xs font-bold shadow-md text-white rounded-full ${
             itemType === 'Lost' 
               ? 'bg-red-500' 
               : itemType === 'Found' 
@@ -62,7 +62,7 @@ const ItemsCard = ({ item, delay = 0 }) => {
 
         {/* Verification Badge */}
         <motion.div
-          className={`absolute top-3 left-3 px-3 py-1.5 text-xs font-bold shadow-lg rounded-full flex items-center gap-1 ${
+          className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold shadow-md rounded-full flex items-center gap-1 ${
             isVerified 
               ? 'bg-green-500 text-white' 
               : 'bg-amber-500 text-white'
@@ -75,29 +75,29 @@ const ItemsCard = ({ item, delay = 0 }) => {
             WebkitBackdropFilter: 'blur(8px)'
           }}
         >
-          {isVerified ? <FaCheckCircle size={12} /> : <FaClock size={12} />}
-          <span>{isVerified ? 'Verified' : 'Pending'}</span>
+          {isVerified ? <FaCheckCircle size={10} /> : <FaClock size={10} />}
+          <span className="hidden sm:inline">{isVerified ? 'Verified' : 'Pending'}</span>
         </motion.div>
       </div>
 
       {/* Card Content */}
-      <div className="flex flex-col flex-grow p-5 gap-3">
+      <div className="flex flex-col flex-grow p-4 gap-2.5">
         {/* Title */}
         <motion.h2
-          className="text-lg font-bold text-slate-900 line-clamp-2"
+          className="text-base font-bold text-slate-900 line-clamp-2 leading-tight"
           whileHover={{ color: '#10b981' }}
         >
           {title}
         </motion.h2>
 
         {/* Description */}
-        <p className="text-sm text-slate-700 line-clamp-2 flex-grow">
+        <p className="text-xs text-slate-600 line-clamp-1 flex-grow">
           {description}
         </p>
 
         {/* Category Badge */}
         <motion.div
-          className="inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-xs font-semibold text-zetech-primary bg-green-50 border border-green-200"
+          className="inline-flex items-center w-fit px-2.5 py-1 rounded-md text-xs font-semibold text-green-700 bg-green-50 border border-green-200"
           whileHover={{ scale: 1.05 }}
         >
           {item.category || 'Uncategorized'}
@@ -107,13 +107,13 @@ const ItemsCard = ({ item, delay = 0 }) => {
         <motion.div
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="pt-2"
+          className="pt-1"
         >
           <GlassButton
             onClick={() => navigate(`/items/${_id}`)}
             variant="primary"
             size="sm"
-            className="w-full"
+            className="w-full text-sm py-2"
           >
             View Details
           </GlassButton>

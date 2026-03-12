@@ -55,7 +55,7 @@ const LatestItems = () => {
             ) : (
                 <>
                     {/* Items Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-6">
                         {items.length > 0 ? (
                             items.map((item) => <ItemsCard key={item._id} item={item} />)
                         ) : (
