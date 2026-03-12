@@ -123,7 +123,7 @@ const AllItems = () => {
                                     className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-between group ${
                                         selectedCategory === category
                                             ? 'bg-green-100 dark:bg-green-900/30 text-zetech-primary dark:text-green-300 border border-zetech-primary/30 shadow-sm'
-                                            : 'text-slate-700 dark:text-slate-300 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
+                                            : 'text-slate-900 dark:text-slate-100 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
                                     }`}
                                 >
                                     <span className="capitalize">{category}</span>
@@ -157,7 +157,7 @@ const AllItems = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                             {filteredItems.length > 0 ? (
                                 filteredItems.map((item, idx) => (
                                     <ItemsCard 
