@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Liquid Glass Morphism - Global Base */
+/* Theme-Aware Global Styles */
 @layer base {
   :root {
     --glass-bg: rgba(16, 185, 129, 0.1);
@@ -10,42 +10,68 @@
     --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   }
 
+  html[data-theme="light"] {
+    --glass-bg: rgba(16, 185, 129, 0.05);
+  }
+
+  html[data-theme="dark"] {
+    --glass-bg: rgba(16, 185, 129, 0.15);
+  }
+
   body {
-    @apply bg-gradient-to-br from-zetech-light via-white to-zetech-light;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html[data-theme="light"] body {
+    @apply bg-white text-slate-900;
+  }
+
+  html[data-theme="dark"] body {
+    @apply bg-slate-950 text-white;
   }
 }
 
-/* Premium Liquid Glass Morphism - ChatGPT Style */
+/* Theme-Aware Glass Components */
 @layer components {
-  /* Ultra-premium glass container */
-  .glass-liquid-premium {
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+  /* Light Theme - Clean Glass Effect */
+  html[data-theme="light"] .glass-liquid-premium {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(16, 185, 129, 0.3);
     border-radius: 24px;
     box-shadow: 
-      0 0 40px rgba(16, 185, 129, 0.15),
-      inset 0 1px 2px rgba(255, 255, 255, 0.3),
-      inset 0 -32px 64px rgba(16, 185, 129, 0.1);
-    position: relative;
-    overflow: hidden;
+      0 4px 20px rgba(16, 185, 129, 0.1),
+      inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
-  .glass-liquid-premium::before {
+  /* Dark Theme - Premium Liquid Glass */
+  html[data-theme="dark"] .glass-liquid-premium {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(110, 231, 183, 0.3);
+    border-radius: 24px;
+    box-shadow: 
+      0 0 40px rgba(16, 185, 129, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2),
+      inset 0 -32px 64px rgba(16, 185, 129, 0.08);
+  }
+
+  html[data-theme="dark"] .glass-liquid-premium::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(16, 185, 129, 0.05) 50%,
-      rgba(255, 255, 255, 0.05) 100%
+      rgba(110, 231, 183, 0.08) 0%,
+      rgba(16, 185, 129, 0.04) 50%,
+      rgba(110, 231, 183, 0.04) 100%
     );
     pointer-events: none;
   }
 
-  .glass-liquid-premium::after {
+  html[data-theme="dark"] .glass-liquid-premium::after {
     content: '';
     position: absolute;
     inset: -1px;
@@ -53,9 +79,9 @@
     padding: 1px;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0) 50%,
-      rgba(16, 185, 129, 0.2) 100%
+      rgba(110, 231, 183, 0.3) 0%,
+      rgba(110, 231, 183, 0) 50%,
+      rgba(16, 185, 129, 0.15) 100%
     );
     -webkit-mask: 
       linear-gradient(#fff 0 0) content-box, 
@@ -65,40 +91,71 @@
     pointer-events: none;
   }
 
-  /* Animated glass card with premium effects */
+  /* Glass Card Premium */
   .glass-card-premium {
     @apply glass-liquid-premium p-8 transition-all duration-500;
     animation: glassFloat 6s ease-in-out infinite;
   }
 
-  .glass-card-premium:hover {
+  html[data-theme="light"] .glass-card-premium:hover {
     border-color: rgba(16, 185, 129, 0.5);
+    background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 
-      0 0 60px rgba(16, 185, 129, 0.25),
-      inset 0 1px 2px rgba(255, 255, 255, 0.4),
+      0 8px 30px rgba(16, 185, 129, 0.15),
+      inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  }
+
+  html[data-theme="dark"] .glass-card-premium:hover {
+    border-color: rgba(110, 231, 183, 0.5);
+    box-shadow: 
+      0 0 60px rgba(16, 185, 129, 0.3),
+      inset 0 1px 2px rgba(255, 255, 255, 0.3),
       inset 0 -32px 64px rgba(16, 185, 129, 0.15);
   }
 
-  /* Standard glass morphism */
-  .glass-morphism {
-    @apply backdrop-blur-lg bg-white/10 border border-white/30 rounded-2xl;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  /* Standard Glass Morphism */
+  html[data-theme="light"] .glass-morphism {
+    @apply backdrop-blur-lg border rounded-2xl;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-color: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.08);
   }
 
-  .glass-morphism-dark {
-    @apply backdrop-blur-xl bg-slate-900/10 border border-slate-500/20 rounded-2xl;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    background: linear-gradient(135deg, rgba(100, 200, 150, 0.1) 0%, rgba(100, 200, 150, 0.05) 100%);
+  html[data-theme="dark"] .glass-morphism {
+    @apply backdrop-blur-lg bg-slate-800/40 border border-slate-600/30 rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  html[data-theme="light"] .glass-morphism-dark {
+    @apply backdrop-blur-lg border rounded-2xl;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+  }
+
+  html[data-theme="dark"] .glass-morphism-dark {
+    @apply backdrop-blur-xl bg-slate-900/20 border border-slate-500/20 rounded-2xl;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
 
   .glass-morphism-card {
-    @apply glass-morphism p-6 hover:border-white/50 transition-all duration-300;
+    @apply glass-morphism p-6 transition-all duration-300;
   }
 
+  html[data-theme="light"] .glass-morphism-card:hover {
+    @apply border-zetech-primary/50;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  html[data-theme="dark"] .glass-morphism-card:hover {
+    @apply border-zetech-accent/50;
+  }
+
+  /* Glass Button */
   .glass-button {
-    @apply px-6 py-2 rounded-lg font-semibold text-white transition-all duration-300;
+    @apply px-6 py-2 rounded-lg font-semibold transition-all duration-300;
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   }
 
@@ -113,22 +170,46 @@
     transform: translateY(0);
   }
 
-  .glass-input {
-    @apply glass-morphism px-4 py-2 text-slate-900 placeholder-slate-400;
+  /* Glass Input */
+  html[data-theme="light"] .glass-input {
+    @apply glass-morphism px-4 py-2 text-slate-900 placeholder-slate-400 transition-all;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  html[data-theme="dark"] .glass-input {
+    @apply glass-morphism px-4 py-2 text-white placeholder-slate-300 transition-all;
   }
 
   .glass-input:focus {
-    @apply outline-none border-zetech-primary/60;
+    @apply outline-none;
+  }
+
+  html[data-theme="light"] .glass-input:focus {
+    border-color: rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+
+  html[data-theme="dark"] .glass-input:focus {
+    border-color: rgba(110, 231, 183, 0.6);
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
   }
 
-  .glass-badge {
+  /* Glass Badge */
+  html[data-theme="light"] .glass-badge {
     @apply glass-morphism px-4 py-1 text-sm font-medium text-zetech-dark inline-block;
+  }
+
+  html[data-theme="dark"] .glass-badge {
+    @apply glass-morphism px-4 py-1 text-sm font-medium text-zetech-accent inline-block;
   }
 
   /* Gradient Text */
   .gradient-text-green {
     @apply bg-gradient-to-r from-zetech-dark via-zetech-primary to-zetech-accent bg-clip-text text-transparent;
+  }
+
+  html[data-theme="dark"] .gradient-text-green {
+    @apply bg-gradient-to-r from-zetech-accent via-zetech-primary to-zetech-secondary bg-clip-text text-transparent;
   }
 
   /* Smooth Scroll Behavior */
@@ -194,8 +275,12 @@
     @apply transition-all duration-300;
   }
 
-  .hover-glow:hover {
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+  html[data-theme="light"] .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.25);
+  }
+
+  html[data-theme="dark"] .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
   }
 
   /* Glass text effect */
