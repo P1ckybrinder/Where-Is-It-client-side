@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import Swal from 'sweetalert2'; 
 import { Helmet } from 'react-helmet-async';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const MyItemsPage = () => {
   const { user } = useContext(AuthContext);
@@ -50,30 +51,32 @@ const MyItemsPage = () => {
   };
 
   return (
-    <div className="p-10 pb-32 min-h-screen bg-white">
+    <div className="p-10 pb-32 min-h-screen bg-zetech-light">
       <Helmet>
-        <title>Manage My Items Page</title>
+        <title>Manage My Items - {schoolConfig.name}</title>
       </Helmet>
+
+      <h1 className="text-2xl font-bold text-zetech-primary mb-6">My Reported Items</h1>
 
       {loading ? (
         <div className="flex justify-center items-center h-32">
-          <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-zetech-primary border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : posts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center text-center space-y-4">
-          <h2 className="text-xl font-semibold text-teal-600">You have no posts yet.</h2>
-          <p className="text-lg text-gray-600">Add your first item to get started.</p>
+        <div className="flex flex-col items-center justify-center text-center space-y-4 bg-white p-8 rounded-lg shadow">
+          <h2 className="text-xl font-semibold text-zetech-primary">You have no posts yet.</h2>
+          <p className="text-lg text-gray-600">Add your first lost or found item to get started.</p>
           <Link to="/addItems">
-            <button className="bg-gradient-to-r from-teal-400 to-teal-600 text-white py-2 px-4 rounded-lg shadow hover:scale-105 transition">
-              Add Item
+            <button className="bg-zetech-primary text-white py-2 px-6 rounded-lg shadow hover:bg-zetech-accent hover:scale-105 transition">
+              Report an Item
             </button>
           </Link>
         </div>
       ) : (
-        <div className="overflow-x-auto shadow-lg rounded-lg">
+        <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
           <table className="table w-full">
-            <thead className="bg-teal-100">
-              <tr className="text-teal-600">
+            <thead className="bg-blue-50">
+              <tr className="text-zetech-primary">
                 <th>Image</th>
                 <th>Title</th>
                 <th>Category</th>
@@ -99,7 +102,7 @@ const MyItemsPage = () => {
                   <td className="text-sm">{post.dateLost}</td>
                   <td>
                     <Link to={`/update/${post._id}`}>
-                      <button className="bg-gradient-to-r from-teal-400 to-teal-600 text-white py-2 px-4 rounded-lg shadow hover:scale-105 transition">
+                      <button className="bg-zetech-primary text-white py-2 px-4 rounded-lg shadow hover:bg-zetech-accent hover:scale-105 transition">
                         Update
                       </button>
                     </Link>

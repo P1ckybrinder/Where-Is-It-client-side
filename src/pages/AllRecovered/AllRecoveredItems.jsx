@@ -3,6 +3,7 @@ import { FiGrid, FiTable, FiMapPin, FiCalendar, FiUser } from 'react-icons/fi';
 import AuthContext from '../../context/Authcontext/AuthContext';
 import { Helmet } from 'react-helmet-async';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const AllRecoveredItems = () => {
   const { user } = useContext(AuthContext);
@@ -27,18 +28,20 @@ const AllRecoveredItems = () => {
   };
 
   return (
-    <div className="p-10 pb-32 min-h-screen bg-white">
+    <div className="p-10 pb-32 min-h-screen bg-zetech-light">
       <Helmet>
-        <title>All Recovered Items Page</title>
+        <title>Recovered Items - {schoolConfig.name}</title>
       </Helmet>
+
+      <h1 className="text-2xl font-bold text-zetech-primary mb-6">Recovered Items</h1>
 
       {/* Button to toggle between grid and table view */}
       <div className="flex justify-end">
         <button
           onClick={toggleLayout}
-          className={`mb-6 px-4 py-2 rounded-lg  flex items-center gap-2 transition-all duration-300 ${isGridLayout
-              ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-md transform hover:scale-105'
-              : 'bg-gray-200 text-gray-600 hover:bg-teal-400 hover:text-white'
+          className={`mb-6 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 ${isGridLayout
+              ? 'bg-zetech-primary text-white shadow-md transform hover:scale-105'
+              : 'bg-gray-200 text-gray-600 hover:bg-zetech-primary hover:text-white'
             }`}
         >
           {isGridLayout ? (
@@ -58,7 +61,7 @@ const AllRecoveredItems = () => {
       {/* Show Spinner while loading */}
       {loading && (
         <div className="flex justify-center items-center h-32">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-teal-500"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-zetech-primary"></div>
         </div>
       )}
 
@@ -104,10 +107,10 @@ const AllRecoveredItems = () => {
             ))}
           </div>
         ) : (
-          <div className="overflow-x-auto shadow-lg rounded-lg">
+          <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
             <table className="min-w-full table-auto">
-              <thead className="bg-teal-100">
-                <tr className="text-teal-600">
+              <thead className="bg-blue-50">
+                <tr className="text-zetech-primary">
                   <th className="border px-4 py-2">Image</th>
                   <th className="border px-4 py-2">Title</th>
                   <th className="border px-4 py-2">Description</th>

@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import Lottie from 'lottie-react';
 import registerAnimation from '../../assets/signup.json';
 import { Helmet } from 'react-helmet-async';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useContext(AuthContext);
@@ -58,17 +59,15 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-gray-50 dark:bg-gray-900 p-6 gap-6">
+    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-zetech-light p-6 gap-6">
       <Helmet>
-        <title>Register Page</title>
+        <title>Register - {schoolConfig.name} Lost & Found</title>
       </Helmet>
 
       {/* Form Section */}
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 transition duration-300 hover:shadow-2xl">
-        <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 dark:text-white">
-          <span className="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">
-            Sign Up
-          </span>
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 transition duration-300 hover:shadow-2xl">
+        <h1 className="text-2xl font-bold text-center mb-4 text-zetech-primary">
+          Create Your {schoolConfig.shortName} Account
         </h1>
         <form onSubmit={handleSignUp} className="space-y-3">
           <div>
@@ -118,7 +117,7 @@ const Register = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          <button className="btn w-full bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow hover:shadow-lg hover:scale-105 transition duration-300 mt-3">
+          <button className="btn w-full bg-zetech-primary text-white rounded-lg shadow hover:bg-zetech-accent hover:shadow-lg hover:scale-105 transition duration-300 mt-3">
             Sign Up
           </button>
         </form>
@@ -126,13 +125,13 @@ const Register = () => {
         <button
           type="button"
           onClick={handleGoogleSignIn}
-          className="btn btn-outline w-full mt-3 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition duration-300"
+          className="btn btn-outline w-full mt-3 border-zetech-primary text-zetech-primary hover:bg-zetech-primary hover:text-white transition duration-300"
         >
           Sign up with Google
         </button>
-        <div className="text-center mt-3 text-gray-600 dark:text-gray-400 text-sm">
+        <div className="text-center mt-3 text-gray-600 text-sm">
           Already have an account?{' '}
-          <Link to="/signin" className="text-teal-500 hover:underline">
+          <Link to="/signin" className="text-zetech-primary hover:underline font-semibold">
             Sign in
           </Link>
         </div>

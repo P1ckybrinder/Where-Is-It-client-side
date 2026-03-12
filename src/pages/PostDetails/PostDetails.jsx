@@ -8,10 +8,12 @@ import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import { schoolConfig } from '../../config/schoolConfig';
+import { FaCheckCircle, FaClock, FaShieldAlt } from 'react-icons/fa';
 
 const PostDetails = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAdmin } = useContext(AuthContext);
   const item = useLoaderData();
+  const isVerified = item.verificationStatus === 'verified';
   const [showModal, setShowModal] = useState(false);
   const [recoveredLocation, setRecoveredLocation] = useState('');
   const [recoveredDate, setRecoveredDate] = useState(new Date());
@@ -58,6 +60,36 @@ const PostDetails = () => {
       <Helmet>
         <title>{item.title} - {schoolConfig.name}</title>
       </Helmet>
+      {/* Verification Status Banner */}
+      <div className={`mb-6 p-4 rounded-lg flex items-center justify-between ${
+        isVerified ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'
+      }`}>
+        <div className="flex items-center gap-3">
+          {isVerified ? (
+            <FaCheckCircle className="text-2xl text-green-600" />
+          ) : (
+            <FaClock className="text-2xl text-yellow-600" />
+          )}
+          <div>
+            <p className={`font-semibold ${isVerified ? 'text-green-700' : 'text-yellow-700'}`}>
+              {isVerified ? 'Verified by Security Office' : 'Pending Verification'}
+            </p>
+            <p className="text-sm text-gray-600">
+              {isVerified 
+                ? 'This item has been verified by the security office.' 
+                : 'This item is awaiting verification by the security office.'
+              }
+            </p>
+          </div>
+        </div>
+        {isVerified && item.verifiedBy && (
+          <div className="text-right text-sm text-gray-500">
+            <p>Verified by: {item.verifiedBy}</p>
+            {item.verifiedAt && <p>{new Date(item.verifiedAt).toLocaleDateString()}</p>}
+          </div>
+        )}
+      </div>
+
       <h2 className="text-3xl font-extrabold text-zetech-primary mb-6 text-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
         {item.title}
       </h2>

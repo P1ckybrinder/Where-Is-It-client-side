@@ -20,7 +20,7 @@ const Askqu = () => {
     return (
         <div className="container mx-auto my-8 p-6 max-w-3xl">
             <motion.h1 
-                className="text-3xl font-bold text-center mb-6 text-teal-600 dark:text-teal-400"
+                className="text-3xl font-bold text-center mb-6 text-zetech-primary"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeInOut' }}

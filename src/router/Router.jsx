@@ -10,12 +10,16 @@ import AddItems from "../pages/AddItems/AddItems";
 import AllItems from "../pages/AllItems/AllItems";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import PrivateRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
 import MyItemsPage from "../pages/MyItemsPage/MyItemsPage";
 import AllRecoveredItems from "../pages/AllRecovered/AllRecoveredItems";
 import UpdateItems from "../pages/UpdateItems/UpdateItems";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Contact from "../pages/Contact/Contact";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import NotificationSettings from "../pages/Settings/NotificationSettings";
+import CampusDirectory from "../pages/Directory/CampusDirectory";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +85,18 @@ const router = createBrowserRouter([
         path: '/allRecovered',
         element: <PrivateRoute><AllRecoveredItems /></PrivateRoute>,
 
+      },
+      {
+        path: '/admin',
+        element: <AdminRoute><AdminDashboard /></AdminRoute>,
+      },
+      {
+        path: '/settings/notifications',
+        element: <PrivateRoute><NotificationSettings /></PrivateRoute>,
+      },
+      {
+        path: '/directory',
+        element: <CampusDirectory />,
       },
     ]
   },

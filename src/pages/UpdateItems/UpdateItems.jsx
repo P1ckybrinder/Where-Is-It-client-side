@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate} from 'react-router-dom';
 import AuthContext from '../../context/Authcontext/AuthContext';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const UpdateItems = () => {
     const item = useLoaderData();
@@ -53,15 +54,15 @@ const UpdateItems = () => {
     return (
         <div className="container mx-auto w-[70%] mb-10 mt-10 bg-white rounded-lg shadow-lg space-y-8">
              <Helmet>
-                            <title>Update Items Page</title>
-                        </Helmet>
-            <h2 className="text-3xl font-bold text-teal-600 mb-6 text-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                <title>Update Item - {schoolConfig.name}</title>
+             </Helmet>
+            <h2 className="text-3xl font-bold text-zetech-primary mb-6 text-center pt-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 Update Item Details
             </h2>
             <form className="space-y-6 p-8 " onSubmit={handleUpdate}>
                 {/* Post Type */}
                 <div className="form-control">
-                    <label htmlFor="postType" className="block text-sm font-medium text-teal-600">
+                    <label htmlFor="postType" className="block text-sm font-medium text-zetech-primary">
                         Post Type
                     </label>
                     <select
@@ -78,7 +79,7 @@ const UpdateItems = () => {
 
                 {/* Image Upload */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Upload Image URL</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Upload Image URL</label>
                     <input
                         type="text"
                         name="image"
@@ -91,7 +92,7 @@ const UpdateItems = () => {
 
                 {/* Title */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Title</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Title</label>
                     <input
                         type="text"
                         name="title"
@@ -104,7 +105,7 @@ const UpdateItems = () => {
 
                 {/* Description */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Description</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Description</label>
                     <textarea
                         className="textarea textarea-bordered w-full mt-2"
                         placeholder="Description"
@@ -116,7 +117,7 @@ const UpdateItems = () => {
 
                 {/* Category */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Category</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Category</label>
                     <select
                         defaultValue={category}
                         name="category"
@@ -130,7 +131,7 @@ const UpdateItems = () => {
 
                 {/* Location */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Location</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Location</label>
                     <input
                         type="text"
                         name="location"
@@ -143,7 +144,7 @@ const UpdateItems = () => {
 
                 {/* Date Lost */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Date Lost</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Date Lost</label>
                     <input
                         type="date"
                         name="dateLost"
@@ -155,7 +156,7 @@ const UpdateItems = () => {
 
                 {/* User Info */}
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Email</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Email</label>
                     <input
                         type="text"
                         defaultValue={user.email}
@@ -165,7 +166,7 @@ const UpdateItems = () => {
                 </div>
 
                 <div className="form-control">
-                    <label className="block text-sm font-medium text-teal-600">Name</label>
+                    <label className="block text-sm font-medium text-zetech-primary">Name</label>
                     <input
                         type="text"
                         defaultValue={user.displayName}
@@ -176,10 +177,9 @@ const UpdateItems = () => {
 
                 {/* Update Button */}
                 <div className="form-control mt-6">
-                    <button className="bg-gradient-to-r from-teal-400 to-teal-600 text-white w-40 mx-auto py-2 px-4 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
+                    <button className="bg-zetech-primary text-white w-40 mx-auto py-2 px-4 rounded-lg shadow hover:bg-zetech-accent hover:shadow-md hover:scale-105 transition">
                         Update Item
                     </button>
-
                 </div>
             </form>
         </div>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaCheckCircle, FaClock } from 'react-icons/fa';
 
 const ItemsCard = ({ item }) => {
-  const { itemType, title, description, image } = item;
+  const { itemType, title, description, image, verificationStatus } = item;
   const navigate = useNavigate();
+  
+  const isVerified = verificationStatus === 'verified';
 
   return (
     <div className="rounded-lg shadow-lg bg-white overflow-hidden border flex flex-col p-2 mb-2">
@@ -18,8 +21,17 @@ const ItemsCard = ({ item }) => {
           }}
         />
         {/* Item Type Tag */}
-        <div className="absolute top-1 right-1 bg-teal-500/90 text-white px-3 py-1 text-xs font-medium shadow-md">
+        <div className={`absolute top-1 right-1 px-3 py-1 text-xs font-medium shadow-md text-white ${
+          itemType === 'Lost' ? 'bg-red-500' : itemType === 'Found' ? 'bg-green-600' : 'bg-zetech-primary'
+        }`}>
           {itemType}
+        </div>
+        {/* Verification Badge */}
+        <div className={`absolute top-1 left-1 px-2 py-1 text-xs font-medium shadow-md rounded flex items-center gap-1 ${
+          isVerified ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+        }`}>
+          {isVerified ? <FaCheckCircle /> : <FaClock />}
+          {isVerified ? 'Verified' : 'Pending'}
         </div>
       </figure>
 
@@ -34,7 +46,7 @@ const ItemsCard = ({ item }) => {
         {/* Action Button */}
         <button
           onClick={() => navigate(`/items/${item._id}`)}
-          className="mt-auto w-28 mx-auto bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-2 rounded-lg hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 transition duration-300 text-xs"
+          className="mt-auto w-28 mx-auto bg-zetech-primary text-white py-2 px-2 rounded-lg hover:bg-zetech-accent transition duration-300 text-xs"
         >
           View Details
         </button>

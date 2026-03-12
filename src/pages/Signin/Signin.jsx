@@ -7,6 +7,7 @@ import axios from 'axios';
 import Lottie from 'lottie-react';
 import loginAnimation from '../../assets/login.json';
 import { Helmet } from 'react-helmet-async';
+import { schoolConfig } from '../../config/schoolConfig';
 
 const Signin = () => {
     const { singInUser, signInWithGoogle } = useContext(AuthContext);
@@ -46,10 +47,10 @@ const Signin = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center p-6 bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center p-6 bg-zetech-light">
              <Helmet>
-                            <title>Signin Page</title>
-                        </Helmet>
+                <title>Sign In - {schoolConfig.name} Lost & Found</title>
+             </Helmet>
             {/* Lottie Animation */}
             <div className="md:w-1/2 w-full flex items-center justify-center mb-8 md:mb-0">
                 <Lottie
@@ -59,14 +60,12 @@ const Signin = () => {
             </div>
 
             {/* Login Form */}
-            <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 transition duration-300 hover:shadow-2xl">
+            <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8 transition duration-300 hover:shadow-2xl">
                 <h1
-                    className="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-white"
+                    className="text-3xl font-bold text-center mb-6 text-zetech-primary"
                     style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
-                    <span className="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">
-                        Login
-                    </span>
+                    Sign In to {schoolConfig.shortName}
                 </h1>
                 <form onSubmit={handleSignin} className="space-y-4">
                     <div className="form-group">
@@ -106,20 +105,20 @@ const Signin = () => {
                         </button>
                     </div>
                     <div className="form-group mt-6">
-                        <button className="btn w-full bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-lg shadow hover:shadow-lg hover:scale-105 transition duration-300">
-                            Login
+                        <button className="btn w-full bg-zetech-primary text-white rounded-lg shadow hover:bg-zetech-accent hover:shadow-lg hover:scale-105 transition duration-300">
+                            Sign In
                         </button>
                     </div>
                     <button
                         type="button"
                         onClick={handleGoogleSignIn}
-                        className="btn btn-outline w-full mt-4 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition duration-300"
+                        className="btn btn-outline w-full mt-4 border-zetech-primary text-zetech-primary hover:bg-zetech-primary hover:text-white transition duration-300"
                     >
                         Sign in with Google
                     </button>
-                    <div className="text-center mt-4 text-gray-600 dark:text-gray-400">
-                        Don't have an account?{' '}
-                        <Link to="/register" className="text-teal-500 hover:underline">
+                    <div className="text-center mt-4 text-gray-600">
+                        {"Don't have an account?"}{' '}
+                        <Link to="/register" className="text-zetech-primary hover:underline font-semibold">
                             Register
                         </Link>
                     </div>
