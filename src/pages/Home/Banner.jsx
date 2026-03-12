@@ -2,89 +2,97 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Lottie from 'lottie-react';
+import { motion } from 'framer-motion';
 import { schoolConfig } from '../../config/schoolConfig';
-import { FaSearch, FaShieldAlt, FaBell, FaHandsHelping } from 'react-icons/fa';
+
+// Import your Lottie JSON animations
+import animation1 from '../../assets/slide2.json';
+import animation2 from '../../assets/slide4.json';
+import animation3 from '../../assets/slide3.json';
+import animation4 from '../../assets/slide1.json';
 
 const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 800,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3000,
     cssEase: 'ease-in-out',
   };
 
   const slides = [
     {
-      icon: FaSearch,
-      title: `Lost Something at ${schoolConfig.shortName}?`,
-      description: `Report it here and our community will help you find it. With our verification system, we reunite lost items with their rightful owners quickly and securely.`,
-      buttonText: "Report Lost Item",
-      buttonLink: "/addItems"
+      title: `Lost Something? Find It Here!`,
+      description: `Join ${schoolConfig.name}'s community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.`,
+      animation: animation1,
     },
     {
-      icon: FaHandsHelping,
-      title: "Found an Item on Campus?",
-      description: `Help return it to someone who needs it. Upload clear photos and details, and our system will match it with lost item reports to reunite belongings with their owners.`,
-      buttonText: "Report Found Item",
-      buttonLink: "/addItems"
+      title: "Helping You Recover What Matters",
+      description: `If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.`,
+      animation: animation2,
     },
     {
-      icon: FaShieldAlt,
-      title: "Secure & Verified Process",
-      description: `Your privacy matters. Our security office verifies all claims before item release, ensuring lost belongings get back to the real owners through a trusted, verified process.`,
-      buttonText: "Learn More",
-      buttonLink: "/aboutUs"
+      title: "Lost? Found? Let's Connect!",
+      description:`Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.`,
+      animation: animation3,
     },
     {
-      icon: FaBell,
-      title: "Get Notified Instantly",
-      description: `Enable notifications to receive alerts when someone finds items matching your lost item report. Never miss a match with our real-time notification system.`,
-      buttonText: "Configure Notifications",
-      buttonLink: "/settings/notifications"
+      title: "Reunite What's Lost",
+      description:`Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.`,
+      animation: animation4,
     },
   ];
 
   return (
-    <div className="container mx-auto my-8 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="container mx-auto my-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <Slider {...settings} className="slick-slider-custom">
-        {slides.map((slide, index) => {
-          const Icon = slide.icon;
-          return (
-            <div key={index} className="p-8 h-96 bg-gradient-to-r from-zetech-dark to-zetech-primary rounded-lg shadow-lg flex items-center">
-              <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8">
-                {/* Left Content */}
-                <div className="w-full md:w-1/2 text-white">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Icon className="text-4xl text-zetech-secondary" />
-                    <h2 className="text-3xl md:text-4xl font-bold">
-                      {slide.title}
-                    </h2>
-                  </div>
-                  <p className="text-base md:text-lg text-blue-100 mb-6 leading-relaxed">
-                    {slide.description}
-                  </p>
-                  <a
-                    href={slide.buttonLink}
-                    className="inline-block px-6 py-3 bg-zetech-secondary text-zetech-dark font-semibold rounded-lg hover:bg-orange-500 transition-colors"
-                  >
-                    {slide.buttonText}
-                  </a>
-                </div>
-
-                {/* Right Icon */}
-                <div className="w-full md:w-1/2 flex justify-center">
-                  <div className="bg-white bg-opacity-10 rounded-full p-8 backdrop-blur-sm">
-                    <Icon className="text-8xl text-zetech-secondary opacity-80" />
-                  </div>
-                </div>
+        {slides.map((slide, index) => (
+          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
+            <motion.div
+              className="flex flex-col md:flex-row justify-between items-center h-full gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 1,
+                ease: 'easeInOut',
+              }}
+            >
+              <div className="w-full md:w-1/2 text-left p-4">
+                <motion.h2 
+                  className="text-2xl md:text-3xl font-bold text-zetech-primary dark:text-blue-400 mb-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                >
+                  {slide.title}
+                </motion.h2>
+                <motion.p 
+                  className="text-gray-600 dark:text-gray-300 mt-2 text-lg"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
+                  {slide.description}
+                </motion.p>
               </div>
-            </div>
-          );
-        })}
+              <div className="w-full md:w-1/2 flex justify-center items-center">
+                <motion.div
+                  className="bg-white dark:bg-gray-800 rounded-full p-4 shadow-md"
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                  <Lottie className="w-[60%] mx-auto" animationData={slide.animation} loop={true} />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        ))}
       </Slider>
     </div>
   );
