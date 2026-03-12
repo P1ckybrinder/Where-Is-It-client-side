@@ -7,7 +7,7 @@ const ItemsCard = ({ item }) => {
   const navigate = useNavigate();
 
   return (
-    <motion.div 
+    <motion.div
       className="glass-liquid-premium rounded-2xl overflow-hidden border border-cyan-400/40 dark:border-cyan-500/20 flex flex-col p-4 hover-glow group"
       whileHover={{ scale: 1.03, y: -4 }}
       transition={{ duration: 0.2 }}
