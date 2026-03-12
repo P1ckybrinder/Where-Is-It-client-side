@@ -8,39 +8,39 @@ const Reviews = () => {
     const [reviews] = useState([
         {
             "_id": "1",
-            "name": "John Doe",
+            "name": "Kariuki Mwangi",
             "rating": 5,
             "comment": "This platform helped me recover my lost bag in no time! Excellent service and a very user-friendly interface. Highly recommended!"
         },
         {
             "_id": "2",
-            "name": "Jane Smith",
-            "rating": 4,
-            "comment": "The service is good, but I think it would be even better if there were more categories for different items. Overall, I'm satisfied."
+            "name": "Amara Ochieng",
+            "rating": 5,
+            "comment": "Found my missing phone using this platform in just 2 hours. The process was super easy and the community is incredibly helpful!"
         },
         {
             "_id": "3",
-            "name": "Fahim Khan",
+            "name": "David Kipchoge",
             "rating": 5,
-            "comment": "Amazing! I found my missing phone using this platform, and it was a super easy process. Thank you!"
+            "comment": "Amazing! Lost my wallet on campus and got it back within 24 hours. The interface is clean and the notifications are very timely."
         },
         {
             "_id": "4",
-            "name": "Ayesha Siddiqui",
-            "rating": 3,
-            "comment": "It works well for lost items, but I had difficulty reaching out to support. Some improvement in customer service would make this perfect."
+            "name": "Fatima Hassan",
+            "rating": 4,
+            "comment": "Great platform with quick response times. Found someone's keys and was able to return them easily. Very intuitive design!"
         },
         {
             "_id": "5",
-            "name": "Ali Rahman",
-            "rating": 4,
-            "comment": "Very reliable website. I was able to post my lost item and get quick responses from people who found similar items."
+            "name": "James Mutua",
+            "rating": 5,
+            "comment": "Reliable and trustworthy. Posted my lost keys and recovered them the same day. The community spirit here is wonderful."
         },
         {
             "_id": "6",
-            "name": "Sara Ali",
+            "name": "Zara Kamau",
             "rating": 5,
-            "comment": "A fantastic experience! Found my lost wallet in less than 24 hours. The interface is clean, and the process is so simple."
+            "comment": "Fantastic experience! Simple interface, quick connections, and my lost backpack was returned within hours. Truly impressed!"
         }
     ]);
 
@@ -89,16 +89,31 @@ const Reviews = () => {
         <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 mb-12">
             {/* Header Section */}
             <motion.div
-                className="text-center mb-12"
+                className="text-center mb-14"
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
             >
-                <h2 className="text-3xl md:text-4xl font-bold gradient-text-green mb-3">Student Testimonials</h2>
-                <p className="text-slate-600 dark:text-slate-400 font-semibold text-lg">
-                    See what students say about our Lost & Found service!
-                </p>
+                <motion.h2 
+                  className="text-4xl md:text-5xl font-bold mb-3"
+                  style={{
+                    background: 'linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Student Testimonials
+                </motion.h2>
+                <motion.p 
+                  className="text-lg text-slate-600 font-medium max-w-2xl mx-auto"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  Hear from Zetech students who've successfully recovered their lost items through our platform.
+                </motion.p>
             </motion.div>
 
             {/* Slider Container */}
@@ -108,41 +123,49 @@ const Reviews = () => {
                     style={{ transform: `translateX(-${currentIndex * (100 / cardsPerSlide)}%)` }}
                 >
                     {reviews.map((review, idx) => (
-                        <div
+                        <motion.div
                             key={review._id}
-                            className={`flex-shrink-0 w-full px-3 md:px-4 ${
+                            className={`flex-shrink-0 w-full px-2 md:px-3 ${
                                 cardsPerSlide === 3 ? 'md:w-1/3' : cardsPerSlide === 2 ? 'md:w-1/2' : 'w-full'
                             }`}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
                         >
-                            <GlassCard
-                                variant="elevated"
-                                delay={idx * 0.1}
-                                className="h-full"
+                            <div
+                                className="rounded-2xl p-6 md:p-7 h-full flex flex-col transition-all duration-300 hover:shadow-lg"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.85)',
+                                    border: '1px solid rgba(16, 185, 129, 0.1)',
+                                    backdropFilter: 'blur(10px)',
+                                    WebkitBackdropFilter: 'blur(10px)'
+                                }}
                             >
-                                <div className="flex flex-col h-full">
-                                    {/* Header with Name */}
-                                    <div className="mb-4">
-                                        <h3 className="text-xl md:text-2xl font-bold text-zetech-primary dark:text-zetech-accent mb-2">
-                                            {review.name}
-                                        </h3>
-                                        <StarRating rating={review.rating} />
-                                    </div>
-
-                                    {/* Comment */}
-                                    <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed flex-grow mb-4">
-                                        "{review.comment}"
-                                    </p>
-
-                                    {/* Rating Badge */}
-                                    <motion.div
-                                        className="glass-badge w-fit"
-                                        whileHover={{ scale: 1.05 }}
-                                    >
-                                        {review.rating} out of 5 stars
-                                    </motion.div>
+                                {/* Star Rating - Top */}
+                                <div className="mb-4 flex items-center gap-1">
+                                    <StarRating rating={review.rating} />
                                 </div>
-                            </GlassCard>
-                        </div>
+
+                                {/* Comment Text */}
+                                <p className="text-slate-700 text-sm md:text-base leading-relaxed flex-grow mb-5 font-medium">
+                                    "{review.comment}"
+                                </p>
+
+                                {/* Divider */}
+                                <div className="h-px bg-gradient-to-r from-transparent via-green-200 to-transparent mb-4"></div>
+
+                                {/* Name and Badge */}
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-lg font-bold text-slate-900">
+                                        {review.name}
+                                    </h3>
+                                    <div className="inline-flex items-center px-2.5 py-1 rounded-full bg-green-50 border border-green-200">
+                                        <span className="text-xs font-semibold text-green-700">{review.rating}/5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
 
@@ -183,7 +206,7 @@ const Reviews = () => {
 
             {/* Footer Section */}
             <motion.div
-                className="text-center mt-12"
+                className="text-center mt-14"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -191,9 +214,9 @@ const Reviews = () => {
             >
                 <Link to="/addReview">
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="glass-button-primary px-8 py-3 text-white font-semibold rounded-lg"
+                        whileHover={{ scale: 1.05, boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)' }}
+                        whileTap={{ scale: 0.98 }}
+                        className="glass-button-primary px-8 py-3.5 text-white font-semibold rounded-xl text-base"
                     >
                         Share Your Experience
                     </motion.button>
