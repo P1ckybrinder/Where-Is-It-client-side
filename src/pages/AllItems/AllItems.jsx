@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { schoolConfig } from '../../config/schoolConfig';
 import { GlassSearchBar, GlassCard, GlassButton } from '../../components/glass';
@@ -17,7 +16,7 @@ const AllItems = () => {
     const suggestions = [...new Set(items.map(item => item.title))].slice(0, 8);
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 500);
+        setTimeout(() => setLoading(false), 300);
     }, []);
 
     useEffect(() => {
@@ -44,19 +43,14 @@ const AllItems = () => {
             </Helmet>
             
             {/* Header Section */}
-            <motion.div
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-            >
+            <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold gradient-text-green mb-3">
                     Discover Items
                 </h1>
                 <p className="text-slate-600 dark:text-slate-400 font-semibold text-lg">
                     Find what you're looking for or list lost and found items easily!
                 </p>
-            </motion.div>
+            </div>
 
             {/* Search Bar */}
             <motion.div

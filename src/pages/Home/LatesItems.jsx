@@ -22,14 +22,14 @@ const LatestItems = () => {
         <div className="container mx-auto px-6 py-8">
             {/* Header Section */}
             <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">Latest Items on Campus</h2>
+                <h2 className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">Latest Items on Campus</h2>
                 <p className="text-gray-600 dark:text-gray-400 font-semibold">Check out the most recently reported lost & found items!</p>
             </div>
 
             {/* Loader */}
             {loading ? (
                 <div className="flex justify-center items-center min-h-[200px]">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-cyan-500 border-solid"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-emerald-500 border-solid"></div>
                 </div>
             ) : (
                 <>
@@ -47,7 +47,7 @@ const LatestItems = () => {
                     {/* Footer Section */}
                     <div className="text-center">
                         <Link to="/allItems">
-                            <button className="bg-gradient-to-r from-cyan-500 to-cyan-600 dark:from-cyan-600 dark:to-cyan-700 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 focus:outline-none font-semibold">
+                            <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-150 focus:outline-none font-semibold">
                                 See More Items
                             </button>
                         </Link>

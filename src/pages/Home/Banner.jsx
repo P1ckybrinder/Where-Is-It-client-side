@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Lottie from 'lottie-react';
-import { motion } from 'framer-motion';
 
 // Import your Lottie JSON animations
 import animation1 from '../../assets/slide2.json';
@@ -15,12 +14,12 @@ const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    cssEase: 'ease-in-out',
+    cssEase: 'ease-out',
   };
 
   const slides = [
@@ -47,49 +46,25 @@ const Banner = () => {
   ];
 
   return (
-    <div className="container mx-auto my-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+    <div className="container mx-auto my-8 glass-liquid-premium rounded-lg shadow-lg overflow-hidden">
       <Slider {...settings} className="slick-slider-custom">
         {slides.map((slide, index) => (
-          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-teal-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
-            <motion.div
-              className="flex flex-col md:flex-row justify-between items-center h-full gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 1,
-                ease: 'easeInOut',
-              }}
-            >
+          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-emerald-50 dark:from-gray-900 dark:to-emerald-900/30 rounded-lg">
+            <div className="flex flex-col md:flex-row justify-between items-center h-full gap-6">
               <div className="w-full md:w-1/2 text-left p-4">
-                <motion.h2
-                  className="text-2xl md:text-3xl font-bold text-teal-600 dark:text-teal-400 mb-3"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                >
+                <h2 className="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-3">
                   {slide.title}
-                </motion.h2>
-                <motion.p
-                  className="text-gray-600 dark:text-gray-300 mt-2 text-lg"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                >
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 mt-2 text-lg">
                   {slide.description}
-                </motion.p>
+                </p>
               </div>
               <div className="w-full md:w-1/2 flex justify-center items-center">
-                <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-full p-4 shadow-md"
-                  initial={{ scale: 0.95, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                >
+                <div className="glass-card-elevated rounded-full p-4">
                   <Lottie className="w-[60%] mx-auto" animationData={slide.animation} loop={true} />
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         ))}
       </Slider>
