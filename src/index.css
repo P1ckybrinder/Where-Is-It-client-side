@@ -9,6 +9,34 @@
     --glass-border: rgba(255, 255, 255, 0.5);
     --glass-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: 10px;
+
+    /* Accent system */
+    --accent-primary: #10b981;
+    --accent-primary-hover: #059669;
+    --accent-primary-soft: rgba(16, 185, 129, 0.12);
+    --accent-primary-ring: rgba(16, 185, 129, 0.12);
+    --accent-primary-border: rgba(16, 185, 129, 0.28);
+
+    /* Text system */
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    /* Surface helpers */
+    --surface-light: rgba(255, 255, 255, 0.72);
+    --surface-light-strong: rgba(255, 255, 255, 0.84);
+    --surface-dark: rgba(15, 23, 42, 0.72);
+    --surface-dark-strong: rgba(15, 23, 42, 0.84);
+
+    /* Body background system */
+    --body-light-bg:
+      radial-gradient(circle at top left, rgba(139, 92, 246, 0.12), transparent 35%),
+      radial-gradient(circle at top right, rgba(16, 185, 129, 0.10), transparent 30%),
+      linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+    --body-dark-bg:
+      radial-gradient(circle at top left, rgba(16, 185, 129, 0.08), transparent 25%),
+      radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 25%),
+      linear-gradient(180deg, #020617 0%, #0f172a 100%);
   }
 
   html[data-theme="light"] {
@@ -16,6 +44,15 @@
     --glass-border: rgba(255, 255, 255, 0.55);
     --glass-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: 10px;
+
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --body-light-bg:
+      radial-gradient(circle at top left, rgba(139, 92, 246, 0.12), transparent 35%),
+      radial-gradient(circle at top right, rgba(16, 185, 129, 0.10), transparent 30%),
+      linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
   }
 
   html[data-theme="dark"] {
@@ -23,6 +60,15 @@
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     --glass-blur: 10px;
+
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #cbd5e1;
+
+    --body-dark-bg:
+      radial-gradient(circle at top left, rgba(16, 185, 129, 0.08), transparent 25%),
+      radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 25%),
+      linear-gradient(180deg, #020617 0%, #0f172a 100%);
   }
 
   html {
@@ -30,17 +76,21 @@
   }
 
   body {
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      background 0.25s ease;
     min-height: 100vh;
   }
 
   html[data-theme="light"] body {
-    background: #d1fae5;
-    color: #0f172a;
+    background: var(--body-light-bg);
+    color: var(--text-primary);
   }
 
   html[data-theme="dark"] body {
-    @apply bg-slate-950 text-white;
+    background: var(--body-dark-bg);
+    color: var(--text-primary);
   }
 }
 
