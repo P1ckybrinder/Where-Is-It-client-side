@@ -11,14 +11,17 @@ const ItemsCard = ({ item, delay = 0 }) => {
   const isVerified = verificationStatus === 'verified';
 
   return (
-    <GlassCard
-      variant="interactive"
-      delay={delay}
-      className="overflow-hidden flex flex-col h-full"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, delay }}
+      whileHover={{ y: -4 }}
+      className="glass-morphism-card cursor-pointer h-full flex flex-col overflow-hidden"
       onClick={() => navigate(`/items/${_id}`)}
     >
       {/* Image Section with Tags */}
-      <div className="relative h-40 md:h-48 overflow-hidden rounded-t-2xl mb-4 -m-6 mb-4">
+      <div className="relative h-40 md:h-48 overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
         <motion.img
           className="w-full h-full object-cover"
           src={image || 'https://via.placeholder.com/300'}
@@ -63,23 +66,23 @@ const ItemsCard = ({ item, delay = 0 }) => {
       </div>
 
       {/* Card Content */}
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col flex-grow p-5 gap-3">
         {/* Title */}
         <motion.h2
-          className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 line-clamp-2"
+          className="text-lg font-bold text-slate-900 dark:text-white line-clamp-2"
           whileHover={{ color: '#10b981' }}
         >
           {title}
         </motion.h2>
 
         {/* Description */}
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 flex-grow">
+        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 flex-grow">
           {description}
         </p>
 
         {/* Category Badge */}
         <motion.div
-          className="glass-badge mb-4 w-fit"
+          className="glass-badge w-fit text-xs"
           whileHover={{ scale: 1.05 }}
         >
           {item.category || 'Uncategorized'}
@@ -89,6 +92,7 @@ const ItemsCard = ({ item, delay = 0 }) => {
         <motion.div
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
+          className="pt-2"
         >
           <GlassButton
             onClick={() => navigate(`/items/${_id}`)}
@@ -100,7 +104,7 @@ const ItemsCard = ({ item, delay = 0 }) => {
           </GlassButton>
         </motion.div>
       </div>
-    </GlassCard>
+    </motion.div>
   );
 };
 
