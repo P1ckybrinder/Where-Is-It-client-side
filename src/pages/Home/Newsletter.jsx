@@ -51,27 +51,34 @@ const Newsletter = () => {
 
     return (
         <motion.section
-            className="container mx-auto px-4 md:px-6 py-12 md:py-16 m-4 md:m-6"
+            className="container mx-auto px-4 md:px-6 py-16 md:py-20"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
         >
-            <GlassCard variant="elevated" className="glass-liquid-premium p-8 md:p-12">
-                <div className="flex flex-col items-center">
+            <div className="rounded-3xl p-8 md:p-16 overflow-hidden relative" style={{
+                background: 'linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%)',
+                boxShadow: '0 16px 40px rgba(16, 185, 129, 0.2)'
+            }}>
+                {/* Decorative background element */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48"></div>
+                
+                <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
                     {/* Icon */}
                     <motion.div
                         className="mb-6"
                         variants={itemVariants}
+                        whileHover={{ scale: 1.1 }}
                     >
-                        <div className="glass-button-primary p-4 rounded-full">
+                        <div className="p-4 rounded-full bg-white/20 backdrop-blur-sm" style={{ borderColor: 'rgba(255, 255, 255, 0.3)', border: '2px solid' }}>
                             <FaBell className="text-white" size={32} />
                         </div>
                     </motion.div>
 
                     {/* Heading */}
                     <motion.h2
-                        className="text-3xl md:text-4xl font-bold gradient-text-green mb-3 text-center"
+                        className="text-3xl md:text-5xl font-bold text-white mb-4 text-center text-balance"
                         variants={itemVariants}
                     >
                         Stay Updated on Campus Items
@@ -79,7 +86,7 @@ const Newsletter = () => {
 
                     {/* Description */}
                     <motion.p
-                        className="text-slate-600 dark:text-slate-400 font-semibold text-center mb-8 max-w-2xl text-lg"
+                        className="text-white/90 font-medium text-center mb-10 max-w-2xl text-lg leading-relaxed"
                         variants={itemVariants}
                     >
                         Subscribe to get instant notifications when items matching your description are found at {schoolConfig.shortName}. Never miss a match!
@@ -87,40 +94,38 @@ const Newsletter = () => {
 
                     {/* Form */}
                     <motion.form
-                        className="flex flex-col md:flex-row gap-4 w-full md:max-w-2xl justify-center items-center"
+                        className="flex flex-col sm:flex-row gap-3 w-full max-w-2xl"
                         onSubmit={handleSubmit}
                         variants={itemVariants}
                     >
-                        <GlassInput
+                        <input
                             type="email"
                             placeholder="Enter your school email"
                             value={email}
                             onChange={handleChange}
                             required
-                            className="flex-1 w-full md:w-auto"
-                            label={null}
+                            className="flex-1 px-5 py-3.5 rounded-lg bg-white/95 text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-white/30"
                         />
-                        <GlassButton
+                        <motion.button
                             type="submit"
-                            variant="primary"
-                            size="md"
-                            loading={isSubmitting}
                             disabled={isSubmitting}
-                            className="w-full md:w-auto"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="px-8 py-3.5 rounded-lg bg-white text-green-600 font-bold text-lg transition-all duration-300 disabled:opacity-70"
                         >
                             {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-                        </GlassButton>
+                        </motion.button>
                     </motion.form>
 
                     {/* Trust Message */}
                     <motion.p
-                        className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-6 text-center"
+                        className="text-sm text-white/75 mt-6 text-center font-medium"
                         variants={itemVariants}
                     >
                         We respect your privacy. Unsubscribe at any time.
                     </motion.p>
                 </div>
-            </GlassCard>
+            </div>
         </motion.section>
     );
 };
