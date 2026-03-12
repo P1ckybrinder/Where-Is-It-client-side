@@ -25,23 +25,23 @@ const Banner = () => {
 
   const slides = [
     {
-      title: "Lost Something? Find It Here!",
-      description: "Join a community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.",
+      title: "Where's Your Lost Item?",
+      description: "Can't find your belongings? Post it here and let our community help you track it down. Lost items deserve to be found.",
       animation: animation1,
     },
     {
-      title: "Helping You Recover What Matters",
-      description: "If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.",
+      title: "Found Something? Make a Difference",
+      description: "Discover items waiting to be returned to their owners. Be a hero by reuniting lost belongings with the people who cherish them.",
       animation: animation2,
     },
     {
-      title: "Lost? Found? Let's Connect!",
-      description: "Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.",
+      title: "Your Campus, Your Community",
+      description: "We're building a connected network where nothing stays lost for long. Report, search, and recover with just a few clicks.",
       animation: animation3,
     },
     {
-      title: "Reunite What's Lost",
-      description: "Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.",
+      title: "Every Item Has a Story",
+      description: "From keys to gadgets, we help bring meaningful items back home. Trust our community to get what matters most back to you.",
       animation: animation4,
     },
   ];
