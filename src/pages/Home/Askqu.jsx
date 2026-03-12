@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { FaChevronDown, FaShieldAlt, FaUserCheck, FaBell } from 'react-icons/fa';
 
 const Askqu = () => {
@@ -84,12 +83,7 @@ const Askqu = () => {
         <div className="py-12 px-4 bg-white">
             <div className="max-w-5xl mx-auto">
                 {/* Header with Logo */}
-                <motion.div 
-                    className="text-center mb-12"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                >
+                <div className="text-center mb-12">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <img src="/zetech-logo.svg" alt="Zetech" className="h-10 w-10 object-contain" />
                         <h1 className="text-3xl md:text-4xl font-bold text-zetech-dark">FAQs</h1>
@@ -97,15 +91,10 @@ const Askqu = () => {
                     <p className="text-sm text-gray-600 max-w-2xl mx-auto">
                         Find answers to common questions about reporting and claiming items
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Category Tabs */}
-                <motion.div 
-                    className="flex flex-wrap justify-center gap-2 mb-10"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                >
+                <div className="flex flex-wrap justify-center gap-2 mb-10">
                     {categories.map((category) => {
                         const Icon = category.icon;
                         return (
@@ -126,16 +115,13 @@ const Askqu = () => {
                             </button>
                         );
                     })}
-                </motion.div>
+                </div>
 
                 {/* FAQ Items */}
                 <div className="space-y-2">
                     {faqs[activeCategory].map((item, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.2 }}
                             className="group"
                         >
                             <button
@@ -146,40 +132,23 @@ const Askqu = () => {
                                     <h3 className="text-base font-semibold text-zetech-dark group-hover:text-zetech-primary transition-colors">
                                         {item.question}
                                     </h3>
-                                    <motion.div
-                                        animate={{ rotate: expandedItem === index ? 180 : 0 }}
-                                        transition={{ duration: 0.15 }}
-                                        className="flex-shrink-0"
-                                    >
-                                        <FaChevronDown className="text-zetech-primary text-base" />
-                                    </motion.div>
+                                    <div className={`flex-shrink-0 text-zetech-primary text-base transition-transform ${expandedItem === index ? 'rotate-180' : ''}`}>
+                                        <FaChevronDown />
+                                    </div>
                                 </div>
                             </button>
 
-                            <motion.div
-                                initial={false}
-                                animate={{
-                                    height: expandedItem === index ? 'auto' : 0,
-                                    opacity: expandedItem === index ? 1 : 0
-                                }}
-                                transition={{ duration: 0.15 }}
-                                className="overflow-hidden"
-                            >
+                            {expandedItem === index && (
                                 <div className="px-4 py-3 bg-zetech-light text-sm text-gray-700 border-l-4 border-zetech-secondary rounded-b-lg">
                                     {item.answer}
                                 </div>
-                            </motion.div>
-                        </motion.div>
+                            )}
+                        </div>
                     ))}
                 </div>
 
                 {/* Contact CTA */}
-                <motion.div 
-                    className="mt-10 p-6 bg-zetech-primary rounded-lg text-white text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.25 }}
-                >
+                <div className="mt-10 p-6 bg-zetech-primary rounded-lg text-white text-center">
                     <h3 className="text-lg font-bold mb-2">Didn't find your answer?</h3>
                     <p className="mb-3 text-sm text-blue-100">Contact our support team</p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -190,7 +159,7 @@ const Askqu = () => {
                             Email Us
                         </a>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );
