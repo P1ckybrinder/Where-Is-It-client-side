@@ -48,7 +48,7 @@ const AllItems = () => {
                 className="text-center mb-12"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.3 }}
             >
                 <h1 className="text-4xl md:text-5xl font-bold gradient-text-green mb-3">
                     Discover Items
@@ -94,7 +94,7 @@ const AllItems = () => {
                                 whileHover={{ x: 4 }}
                                 className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all ${
                                     !selectedCategory
-                                        ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
+                                        ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 dark:from-cyan-600 dark:to-cyan-700 text-white'
                                         : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                                 }`}
                             >
@@ -108,7 +108,7 @@ const AllItems = () => {
                                     whileHover={{ x: 4 }}
                                     className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
                                         selectedCategory === category
-                                            ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
+                                            ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 dark:from-cyan-600 dark:to-cyan-700 text-white'
                                             : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                                     }`}
                                 >
@@ -132,7 +132,7 @@ const AllItems = () => {
                     {loading ? (
                         <div className="flex justify-center items-center h-96">
                             <div className="glass-card-default p-8 rounded-2xl">
-                                <div className="w-16 h-16 border-4 border-zetech-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                                 <p className="text-center text-slate-600 dark:text-slate-400 font-semibold">
                                     Loading items...
                                 </p>
