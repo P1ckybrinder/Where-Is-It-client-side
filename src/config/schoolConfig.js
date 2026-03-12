@@ -52,16 +52,16 @@ export const schoolConfig = {
     'Other'
   ],
   
-  // Brand Colors
+  // Brand Colors - Vibrant Green Palette
   colors: {
-    primary: '#1e40af',      // Deep Blue (Zetech Primary)
-    secondary: '#f59e0b',     // Amber (Zetech Accent)
+    primary: '#10b981',      // Emerald Green
+    secondary: '#059669',     // Deep Green
     success: '#10b981',       // Emerald
     danger: '#ef4444',        // Red
     warning: '#f59e0b',       // Amber
-    info: '#3b82f6',          // Blue
-    dark: '#0f172a',          // Slate-900
-    light: '#f1f5f9'          // Slate-100
+    info: '#06b6d4',          // Cyan
+    dark: '#064e3b',          // Dark Forest
+    light: '#f0fdf4'          // Very Light Green
   },
   
   // Admin Email Addresses (Users with these emails get admin access)

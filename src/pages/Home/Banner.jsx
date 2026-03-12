@@ -2,25 +2,19 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Lottie from 'lottie-react';
 import { motion } from 'framer-motion';
 import { schoolConfig } from '../../config/schoolConfig';
-
-// Import your Lottie JSON animations
-import animation1 from '../../assets/slide2.json';
-import animation2 from '../../assets/slide4.json';
-import animation3 from '../../assets/slide3.json';
-import animation4 from '../../assets/slide1.json';
+import { FaSearch, FaShieldAlt, FaBell, FaHandsHelping } from 'react-icons/fa';
 
 const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     cssEase: 'ease-in-out',
   };
 
@@ -28,71 +22,99 @@ const Banner = () => {
     {
       title: `Lost Something? Find It Here!`,
       description: `Join ${schoolConfig.name}'s community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.`,
-      animation: animation1,
+      icon: FaSearch,
+      ctaText: 'Report Lost Item',
+      ctaLink: '/addItems'
     },
     {
       title: "Helping You Recover What Matters",
       description: `If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.`,
-      animation: animation2,
+      icon: FaHandsHelping,
+      ctaText: 'Report Found Item',
+      ctaLink: '/addItems'
     },
     {
-      title: "Lost? Found? Let's Connect!",
-      description:`Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.`,
-      animation: animation3,
+      title: "Secure & Verified Process",
+      description: `Your privacy matters. Our security system ensures all claims are verified before item release, maintaining trust in our community.`,
+      icon: FaShieldAlt,
+      ctaText: 'Learn More',
+      ctaLink: '/aboutUs'
     },
     {
-      title: "Reunite What's Lost",
-      description:`Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.`,
-      animation: animation4,
+      title: "Get Notified Instantly",
+      description: `Enable notifications to receive real-time alerts when someone finds items matching your lost item report. Never miss a match!`,
+      icon: FaBell,
+      ctaText: 'Configure Alerts',
+      ctaLink: '/settings/notifications'
     },
   ];
 
   return (
-    <div className="container mx-auto my-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+    <div className="container mx-auto my-8 glass-morphism overflow-hidden rounded-3xl">
       <Slider {...settings} className="slick-slider-custom">
-        {slides.map((slide, index) => (
-          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
-            <motion.div
-              className="flex flex-col md:flex-row justify-between items-center h-full gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 1,
-                ease: 'easeInOut',
-              }}
-            >
-              <div className="w-full md:w-1/2 text-left p-4">
-                <motion.h2 
-                  className="text-2xl md:text-3xl font-bold text-zetech-primary dark:text-blue-400 mb-3"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                >
-                  {slide.title}
-                </motion.h2>
-                <motion.p 
-                  className="text-gray-600 dark:text-gray-300 mt-2 text-lg"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                >
-                  {slide.description}
-                </motion.p>
+        {slides.map((slide, index) => {
+          const Icon = slide.icon;
+          return (
+            <div key={index} className="p-8 h-96 bg-gradient-to-br from-zetech-dark via-zetech-primary to-zetech-accent rounded-3xl relative overflow-hidden group">
+              {/* Animated Background Elements */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-zetech-accent rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
               </div>
-              <div className="w-full md:w-1/2 flex justify-center items-center">
+
+              <motion.div
+                className="flex flex-col md:flex-row justify-between items-center h-full gap-8 relative z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Left Content */}
+                <div className="w-full md:w-1/2 text-white">
+                  <motion.div
+                    className="flex items-center gap-3 mb-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                  >
+                    <Icon className="text-4xl text-zetech-accent" />
+                    <h2 className="text-3xl md:text-4xl font-bold">{slide.title}</h2>
+                  </motion.div>
+
+                  <motion.p 
+                    className="text-base md:text-lg text-white/90 mb-6 leading-relaxed"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                  >
+                    {slide.description}
+                  </motion.p>
+
+                  <motion.a
+                    href={slide.ctaLink}
+                    className="glass-button inline-block"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                  >
+                    {slide.ctaText}
+                  </motion.a>
+                </div>
+
+                {/* Right Icon */}
                 <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-full p-4 shadow-md"
-                  initial={{ scale: 0.95, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="w-full md:w-1/2 flex justify-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
                 >
-                  <Lottie className="w-[60%] mx-auto" animationData={slide.animation} loop={true} />
+                  <div className="glass-morphism p-12 rounded-3xl hover-glow">
+                    <Icon className="text-8xl text-white opacity-80 mx-auto" />
+                  </div>
                 </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        ))}
+              </motion.div>
+            </div>
+          );
+        })}
       </Slider>
     </div>
   );

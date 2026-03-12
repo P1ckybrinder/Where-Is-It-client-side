@@ -1,3 +1,115 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Liquid Glass Morphism - Global Base */
+@layer base {
+  :root {
+    --glass-bg: rgba(16, 185, 129, 0.1);
+    --glass-border: rgba(16, 185, 129, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  }
+
+  body {
+    @apply bg-gradient-to-br from-zetech-light via-white to-zetech-light;
+  }
+}
+
+/* Liquid Glass Component - Reusable */
+@layer components {
+  .glass-morphism {
+    @apply backdrop-blur-lg bg-white/10 border border-white/30 rounded-2xl;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  }
+
+  .glass-morphism-dark {
+    @apply backdrop-blur-xl bg-slate-900/10 border border-slate-500/20 rounded-2xl;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    background: linear-gradient(135deg, rgba(100, 200, 150, 0.1) 0%, rgba(100, 200, 150, 0.05) 100%);
+  }
+
+  .glass-morphism-card {
+    @apply glass-morphism p-6 hover:border-white/50 transition-all duration-300;
+  }
+
+  .glass-button {
+    @apply px-6 py-2 rounded-lg font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .glass-button:hover {
+    @apply shadow-lg;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .glass-button:active {
+    @apply shadow-md;
+    transform: translateY(0);
+  }
+
+  .glass-input {
+    @apply glass-morphism px-4 py-2 text-slate-900 placeholder-slate-400;
+  }
+
+  .glass-input:focus {
+    @apply outline-none border-zetech-primary/60;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .glass-badge {
+    @apply glass-morphism px-4 py-1 text-sm font-medium text-zetech-dark inline-block;
+  }
+
+  /* Gradient Text */
+  .gradient-text-green {
+    @apply bg-gradient-to-r from-zetech-dark via-zetech-primary to-zetech-accent bg-clip-text text-transparent;
+  }
+
+  /* Smooth Scroll Behavior */
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hover Glow Effect */
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+  }
+}
