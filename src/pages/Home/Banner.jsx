@@ -1,60 +1,100 @@
 import React from 'react';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Lottie from 'lottie-react';
 import { motion } from 'framer-motion';
-import BannerCarousel from '../../components/BannerCarousel';
+
+// Import your Lottie JSON animations
+import animation1 from '../../assets/slide2.json';
+import animation2 from '../../assets/slide4.json';
+import animation3 from '../../assets/slide3.json';
+import animation4 from '../../assets/slide1.json';
 
 const Banner = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    cssEase: 'ease-in-out',
+  };
+
+  const slides = [
+    {
+      title: "Lost Something? Find It Here!",
+      description: "Join a community dedicated to reuniting lost belongings with their rightful owners. Your help can make a difference.",
+      animation: animation1,
+    },
+    {
+      title: "Helping You Recover What Matters",
+      description: "If you've lost something valuable, we're here to help you find it. And if you've found it, let us connect you with the person who needs it back.",
+      animation: animation2,
+    },
+    {
+      title: "Lost? Found? Let's Connect!",
+      description: "Whether you've lost an item or found one, this is the place to reunite. Together, we can bring what's lost back home.",
+      animation: animation3,
+    },
+    {
+      title: "Reunite What's Lost",
+      description: "Help others reconnect with what they've lost. A community of finders and seekers, here to make a difference.",
+      animation: animation4,
+    },
+  ];
+
   return (
-    <div className="container mx-auto my-8 px-4">
-      {/* Banner Carousel */}
-      <BannerCarousel />
-
-      {/* Stats Cards - Cyan Color System with Theme Support */}
-      <motion.div
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
-      >
-        {[
-          { label: 'Items Reunited', value: '1,200+', icon: '📦' },
-          { label: 'Active Users', value: '500+', icon: '👥' },
-          { label: 'Success Rate', value: '85%', icon: '✨' },
-          { label: 'Campus Locations', value: '20+', icon: '📍' }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            className="relative p-4 md:p-6 rounded-2xl text-center overflow-hidden group"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + index * 0.05, duration: 0.3 }}
-          >
-            {/* Light Theme: Cyan/Blue Background, Dark Theme: Glass Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-cyan-600 dark:from-slate-800/40 dark:to-slate-900/40 rounded-2xl backdrop-blur-md dark:backdrop-blur-lg border border-cyan-400/40 dark:border-cyan-500/20"/>
-
-            {/* Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full">
-              <p className="text-2xl md:text-3xl mb-2">{stat.icon}</p>
-              <p className="text-white dark:text-white text-lg md:text-2xl font-bold">
-                {stat.value}
-              </p>
-              <p className="text-white/90 dark:text-cyan-100 text-xs md:text-sm mt-2 font-semibold">
-                {stat.label}
-              </p>
-            </div>
-
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{
-              background: 'radial-gradient(circle at center, rgba(6,182,212,0.2) 0%, transparent 70%)',
-              pointerEvents: 'none'
-            }}/>
-          </motion.div>
+    <div className="container mx-auto my-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <Slider {...settings} className="slick-slider-custom">
+        {slides.map((slide, index) => (
+          <div key={index} className="p-6 h-[500px] bg-gradient-to-r from-white to-teal-50 dark:from-gray-900 dark:to-gray-800 rounded-lg shadow-lg">
+            <motion.div
+              className="flex flex-col md:flex-row justify-between items-center h-full gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 1,
+                ease: 'easeInOut',
+              }}
+            >
+              <div className="w-full md:w-1/2 text-left p-4">
+                <motion.h2
+                  className="text-2xl md:text-3xl font-bold text-teal-600 dark:text-teal-400 mb-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                >
+                  {slide.title}
+                </motion.h2>
+                <motion.p
+                  className="text-gray-600 dark:text-gray-300 mt-2 text-lg"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
+                  {slide.description}
+                </motion.p>
+              </div>
+              <div className="w-full md:w-1/2 flex justify-center items-center">
+                <motion.div
+                  className="bg-white dark:bg-gray-800 rounded-full p-4 shadow-md"
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                  <Lottie className="w-[60%] mx-auto" animationData={slide.animation} loop={true} />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </Slider>
     </div>
   );
 };
 
 export default Banner;
-
