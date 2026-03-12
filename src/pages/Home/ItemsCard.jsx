@@ -1,58 +1,108 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { FaCheckCircle, FaClock } from 'react-icons/fa';
+import { GlassCard, GlassButton } from '../../components/glass';
 
-const ItemsCard = ({ item }) => {
-  const { itemType, title, description, image, verificationStatus } = item;
+const ItemsCard = ({ item, delay = 0 }) => {
+  const { itemType, title, description, image, verificationStatus, _id } = item;
   const navigate = useNavigate();
   
   const isVerified = verificationStatus === 'verified';
 
   return (
-    <div className="rounded-lg shadow-lg bg-white overflow-hidden border flex flex-col p-2 mb-2">
-      {/* Image Section with Tag */}
-      <figure className="rounded-t-lg overflow-hidden relative h-40">
-        <img
-          className="w-full h-full object-cover rounded-t-lg"
-          src={image || 'https://via.placeholder.com/300'} // Fallback image
+    <GlassCard
+      variant="interactive"
+      delay={delay}
+      className="overflow-hidden flex flex-col h-full"
+      onClick={() => navigate(`/items/${_id}`)}
+    >
+      {/* Image Section with Tags */}
+      <div className="relative h-40 md:h-48 overflow-hidden rounded-t-2xl mb-4 -m-6 mb-4">
+        <motion.img
+          className="w-full h-full object-cover"
+          src={image || 'https://via.placeholder.com/300'}
           alt={title}
-          onError={(e) => { 
-            e.target.src = 'https://via.placeholder.com/300'; // Fallback on error
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/300';
           }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         />
-        {/* Item Type Tag */}
-        <div className={`absolute top-1 right-1 px-3 py-1 text-xs font-medium shadow-md text-white ${
-          itemType === 'Lost' ? 'bg-red-500' : itemType === 'Found' ? 'bg-green-600' : 'bg-zetech-primary'
-        }`}>
+        
+        {/* Item Type Badge */}
+        <motion.div
+          className={`absolute top-3 right-3 px-3 py-1 text-xs font-bold shadow-lg text-white rounded-full backdrop-blur-sm ${
+            itemType === 'Lost' 
+              ? 'bg-red-500/80' 
+              : itemType === 'Found' 
+              ? 'bg-green-500/80' 
+              : 'bg-zetech-primary/80'
+          }`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+        >
           {itemType}
-        </div>
+        </motion.div>
+
         {/* Verification Badge */}
-        <div className={`absolute top-1 left-1 px-2 py-1 text-xs font-medium shadow-md rounded flex items-center gap-1 ${
-          isVerified ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-        }`}>
-          {isVerified ? <FaCheckCircle /> : <FaClock />}
-          {isVerified ? 'Verified' : 'Pending'}
-        </div>
-      </figure>
+        <motion.div
+          className={`absolute top-3 left-3 px-3 py-1 text-xs font-bold shadow-lg rounded-full flex items-center gap-1 backdrop-blur-sm ${
+            isVerified 
+              ? 'bg-green-400/90 text-green-900' 
+              : 'bg-amber-400/90 text-amber-900'
+          }`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.15 }}
+        >
+          {isVerified ? <FaCheckCircle size={12} /> : <FaClock size={12} />}
+          <span>{isVerified ? 'Verified' : 'Pending'}</span>
+        </motion.div>
+      </div>
 
       {/* Card Content */}
-      <div className="flex flex-col flex-grow p-2">
+      <div className="flex flex-col flex-grow">
         {/* Title */}
-        <h2 className="text-lg font-semibold text-gray-800 mt-1">{title}</h2>
+        <motion.h2
+          className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 line-clamp-2"
+          whileHover={{ color: '#10b981' }}
+        >
+          {title}
+        </motion.h2>
 
         {/* Description */}
-        <p className="text-sm text-gray-600 mt-1 mb-2">{description.slice(0, 60)}...</p>
+        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 flex-grow">
+          {description}
+        </p>
+
+        {/* Category Badge */}
+        <motion.div
+          className="glass-badge mb-4 w-fit"
+          whileHover={{ scale: 1.05 }}
+        >
+          {item.category || 'Uncategorized'}
+        </motion.div>
 
         {/* Action Button */}
-        <button
-          onClick={() => navigate(`/items/${item._id}`)}
-          className="mt-auto w-28 mx-auto bg-zetech-primary text-white py-2 px-2 rounded-lg hover:bg-zetech-accent transition duration-300 text-xs"
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          View Details
-        </button>
+          <GlassButton
+            onClick={() => navigate(`/items/${_id}`)}
+            variant="primary"
+            size="sm"
+            className="w-full"
+          >
+            View Details
+          </GlassButton>
+        </motion.div>
       </div>
-    </div>
+    </GlassCard>
   );
 };
 
 export default ItemsCard;
+

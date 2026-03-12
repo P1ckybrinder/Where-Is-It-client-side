@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import { FaBell } from 'react-icons/fa';
 import { schoolConfig } from '../../config/schoolConfig';
+import { GlassCard, GlassInput, GlassButton } from '../../components/glass';
 
 const Newsletter = () => {
     const [email, setEmail] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         setEmail(e.target.value);
@@ -12,86 +15,113 @@ const Newsletter = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Thank You for Subscribing!',
-            text: 'You will receive updates about lost & found items.',
-            position: 'top',
-            toast: true,
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
+        setTimeout(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Subscribed!',
+                text: 'You will receive notifications about matching items.',
+                position: 'top',
+                toast: true,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setEmail('');
+            setEmail('');
+            setIsSubmitting(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 500);
     };
 
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0, y: 20 },
         show: {
             opacity: 1,
-            transition: { duration: 0.8, ease: 'easeInOut' }
+            y: 0,
+            transition: { duration: 0.8, ease: 'easeInOut', staggerChildren: 0.1 }
         }
     };
 
-    const inputVariants = {
-        hidden: { opacity: 0, x: -10 },
-        show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-    };
-
-    const buttonVariants = {
+    const itemVariants = {
         hidden: { opacity: 0, y: 10 },
         show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
     };
 
     return (
-        <section className="bg-zetech-light p-12 m-12 rounded-2xl">
-            <div className="container mx-auto text-center">
-                <motion.h2
-                    className="text-3xl font-bold mb-6 text-zetech-primary"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="show"
-                >
-                    Stay Updated on Campus Items
-                </motion.h2>
-                <motion.p
-                    className="text-gray-600 font-semibold mb-6"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="show"
-                >
-                    Subscribe to get notified when items matching your description are found at {schoolConfig.shortName}.
-                </motion.p>
-                <form
-                    className="flex flex-col md:flex-row justify-center items-center gap-4"
-                    onSubmit={handleSubmit}
-                >
-                    <motion.input
-                        type="email"
-                        className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary"
-                        placeholder="Enter your school email"
-                        value={email}
-                        onChange={handleChange}
-                        required
-                        variants={inputVariants}
-                        initial="hidden"
-                        animate="show"
-                    />
-                    <motion.button
-                        type="submit"
-                        className="bg-zetech-primary text-white py-2 px-6 rounded-lg shadow-lg hover:bg-zetech-accent transition duration-300"
-                        variants={buttonVariants}
-                        initial="hidden"
-                        animate="show"
+        <motion.section
+            className="container mx-auto px-4 md:px-6 py-12 md:py-16 m-4 md:m-6"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
+            <GlassCard variant="elevated" className="glass-liquid-premium p-8 md:p-12">
+                <div className="flex flex-col items-center">
+                    {/* Icon */}
+                    <motion.div
+                        className="mb-6"
+                        variants={itemVariants}
                     >
-                        Subscribe
-                    </motion.button>
-                </form>
-            </div>
-        </section>
+                        <div className="glass-button-primary p-4 rounded-full">
+                            <FaBell className="text-white" size={32} />
+                        </div>
+                    </motion.div>
+
+                    {/* Heading */}
+                    <motion.h2
+                        className="text-3xl md:text-4xl font-bold gradient-text-green mb-3 text-center"
+                        variants={itemVariants}
+                    >
+                        Stay Updated on Campus Items
+                    </motion.h2>
+
+                    {/* Description */}
+                    <motion.p
+                        className="text-slate-600 dark:text-slate-400 font-semibold text-center mb-8 max-w-2xl text-lg"
+                        variants={itemVariants}
+                    >
+                        Subscribe to get instant notifications when items matching your description are found at {schoolConfig.shortName}. Never miss a match!
+                    </motion.p>
+
+                    {/* Form */}
+                    <motion.form
+                        className="flex flex-col md:flex-row gap-4 w-full md:max-w-2xl justify-center items-center"
+                        onSubmit={handleSubmit}
+                        variants={itemVariants}
+                    >
+                        <GlassInput
+                            type="email"
+                            placeholder="Enter your school email"
+                            value={email}
+                            onChange={handleChange}
+                            required
+                            className="flex-1 w-full md:w-auto"
+                            label={null}
+                        />
+                        <GlassButton
+                            type="submit"
+                            variant="primary"
+                            size="md"
+                            loading={isSubmitting}
+                            disabled={isSubmitting}
+                            className="w-full md:w-auto"
+                        >
+                            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                        </GlassButton>
+                    </motion.form>
+
+                    {/* Trust Message */}
+                    <motion.p
+                        className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-6 text-center"
+                        variants={itemVariants}
+                    >
+                        We respect your privacy. Unsubscribe at any time.
+                    </motion.p>
+                </div>
+            </GlassCard>
+        </motion.section>
     );
 };
 

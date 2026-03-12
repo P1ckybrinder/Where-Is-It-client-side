@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
-import ItemsCard from '../Home/ItemsCard';
+import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { schoolConfig } from '../../config/schoolConfig';
+import { GlassSearchBar, GlassCard, GlassButton } from '../../components/glass';
+import ItemsCard from '../Home/ItemsCard';
 
 const AllItems = () => {
     const items = useLoaderData();
@@ -12,23 +13,20 @@ const AllItems = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [loading, setLoading] = useState(true);
     
-    // Get all unique categories
     const categories = [...new Set(items.map(item => item.category))];
+    const suggestions = [...new Set(items.map(item => item.title))].slice(0, 8);
 
-    // Simulate loading effect
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1000);
+        setTimeout(() => setLoading(false), 500);
     }, []);
 
-    // Debounce search input to improve performance
     useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearchValue(searchValue);
-        }, 500);
+        }, 300);
         return () => clearTimeout(timer);
     }, [searchValue]);
 
-    // Filter items based on category and search value
     const filteredItems = items.filter(
         (item) =>
             (selectedCategory ? item.category === selectedCategory : true) &&
@@ -46,83 +44,148 @@ const AllItems = () => {
             </Helmet>
             
             {/* Header Section */}
-            <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-zetech-primary mb-2">Discover Items</h1>
-                <p className="text-gray-600 font-semibold">Find what you're looking for or list lost and found items easily!</p>
-            </div>
+            <motion.div
+                className="text-center mb-12"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                <h1 className="text-4xl md:text-5xl font-bold gradient-text-green mb-3">
+                    Discover Items
+                </h1>
+                <p className="text-slate-600 dark:text-slate-400 font-semibold text-lg">
+                    Find what you're looking for or list lost and found items easily!
+                </p>
+            </motion.div>
 
             {/* Search Bar */}
-            <div className="mb-6 flex justify-center">
-                <div className="relative w-full max-w-xl">
-                    <span className="absolute inset-y-0 left-4 flex items-center text-gray-400">
-                        <FaSearch />
-                    </span>
-                    <input
-                        type="text"
-                        placeholder="Search by title, location, or category"
-                        className="input input-bordered w-full rounded-full pl-12 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary transition-all duration-200"
+            <motion.div
+                className="mb-8 flex justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+            >
+                <div className="w-full max-w-2xl">
+                    <GlassSearchBar
+                        placeholder="Search by title, location, or category..."
                         value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onSearch={setSearchValue}
+                        suggestions={suggestions}
+                        onSuggestionClick={(suggestion) => setSearchValue(suggestion)}
                     />
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col md:flex-row gap-6">
-                {/* Sidebar Section */}
-                <div className="md:w-1/4 bg-gray-50 p-4 rounded-lg shadow-md w-full">
-                    <ul className="space-y-2">
-                        <li>
-                            <button 
-                                className={`w-full text-lg font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${!selectedCategory ? 'bg-zetech-primary text-white' : 'text-gray-600'}`}
+            <div className="flex flex-col lg:flex-row gap-8">
+                {/* Sidebar Section - Categories */}
+                <motion.div
+                    className="lg:w-1/4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                    <GlassCard variant="elevated" className="p-6 sticky top-24">
+                        <h3 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">
+                            Categories
+                        </h3>
+                        <div className="space-y-2">
+                            <motion.button
                                 onClick={() => setSelectedCategory('')}
+                                whileHover={{ x: 4 }}
+                                className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all ${
+                                    !selectedCategory
+                                        ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
+                                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                }`}
                             >
                                 All Categories
-                            </button>
-                        </li>
-                        {categories.map((category) => (
-                            <li key={category}>
-                                <button 
-                                    className={`w-full text-sm font-semibold text-left px-4 py-2 rounded-lg focus:outline-none ${selectedCategory === category ? 'bg-zetech-primary text-white' : 'text-gray-600'}`}
+                            </motion.button>
+
+                            {categories.map((category) => (
+                                <motion.button
+                                    key={category}
                                     onClick={() => setSelectedCategory(category)}
+                                    whileHover={{ x: 4 }}
+                                    className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
+                                        selectedCategory === category
+                                            ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white'
+                                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                    }`}
                                 >
                                     {category}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                                    <span className="text-xs ml-2 opacity-70">
+                                        ({items.filter(i => i.category === category).length})
+                                    </span>
+                                </motion.button>
+                            ))}
+                        </div>
+                    </GlassCard>
+                </motion.div>
 
                 {/* Main Content Section */}
-                <div className="md:w-3/4 w-full">
-                    {/* Spinner */}
+                <motion.div
+                    className="lg:w-3/4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                >
                     {loading ? (
-                        <div className="flex justify-center items-center h-32">
-                            <div className="w-12 h-12 border-4 border-zetech-primary border-t-transparent rounded-full animate-spin"></div>
+                        <div className="flex justify-center items-center h-96">
+                            <div className="glass-card-default p-8 rounded-2xl">
+                                <div className="w-16 h-16 border-4 border-zetech-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                <p className="text-center text-slate-600 dark:text-slate-400 font-semibold">
+                                    Loading items...
+                                </p>
+                            </div>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {filteredItems.length > 0 ? (
-                                filteredItems.map((item) => (
-                                    <ItemsCard key={item._id} item={item} />
+                                filteredItems.map((item, idx) => (
+                                    <ItemsCard 
+                                        key={item._id} 
+                                        item={item}
+                                        delay={idx * 0.05}
+                                    />
                                 ))
                             ) : (
-                                <p className="text-center text-gray-500 col-span-full text-lg font-medium">
-                                    No items match your search or category!
-                                </p>
+                                <motion.div
+                                    className="col-span-full text-center py-16"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                >
+                                    <div className="glass-card-default p-12 rounded-2xl inline-block">
+                                        <p className="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                            No items found
+                                        </p>
+                                        <p className="text-slate-600 dark:text-slate-400">
+                                            Try adjusting your search or category filters
+                                        </p>
+                                    </div>
+                                </motion.div>
                             )}
                         </div>
                     )}
-                </div>
+                </motion.div>
             </div>
 
             {/* Footer Section */}
-            <div className="text-center mt-12 mb-12">
+            <motion.div
+                className="text-center mt-16 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+            >
                 <Link to="/addItems">
-                    <button className="bg-gradient-to-r from-zetech-secondary to-orange-600 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 focus:outline-none">
+                    <GlassButton
+                        variant="primary"
+                        size="lg"
+                    >
                         Post Your Item
-                    </button>
+                    </GlassButton>
                 </Link>
-            </div>
+            </motion.div>
         </div>
     );
 };
