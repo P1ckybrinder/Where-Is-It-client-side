@@ -102,11 +102,11 @@ const AllItems = () => {
                                 className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-between group ${
                                     !selectedCategory
                                         ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white shadow-md'
-                                        : 'text-slate-700 dark:text-slate-300 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
+                                        : 'text-slate-800 dark:text-slate-100 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
                                 }`}
                             >
                                 <span>All Categories</span>
-                                <span className={`text-sm font-medium ${!selectedCategory ? 'text-white/90' : 'text-slate-500'}`}>
+                                <span className={`text-sm font-semibold ${!selectedCategory ? 'text-white/90' : 'text-slate-700 dark:text-slate-300'}`}>
                                     {items.length}
                                 </span>
                             </motion.button>
@@ -120,17 +120,17 @@ const AllItems = () => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.05 }}
-                                    className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-between group ${
+                                    className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-between group ${
                                         selectedCategory === category
-                                            ? 'bg-green-100 dark:bg-green-900/30 text-zetech-primary dark:text-green-300 border border-zetech-primary/30 shadow-sm'
-                                            : 'text-slate-700 dark:text-slate-300 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
+                                            ? 'bg-green-100 dark:bg-green-900/30 text-zetech-primary dark:text-green-200 border border-zetech-primary/50 shadow-sm'
+                                            : 'text-slate-800 dark:text-slate-100 hover:bg-green-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-zetech-primary/20'
                                     }`}
                                 >
                                     <span className="capitalize">{category}</span>
-                                    <span className={`text-xs font-semibold px-2 py-1 rounded-full transition-all ${
+                                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full transition-all ${
                                         selectedCategory === category
                                             ? 'bg-zetech-primary text-white'
-                                            : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 group-hover:bg-zetech-primary group-hover:text-white'
+                                            : 'bg-slate-300 dark:bg-slate-600 text-slate-800 dark:text-slate-200 group-hover:bg-zetech-primary group-hover:text-white'
                                     }`}>
                                         {items.filter(i => i.category === category).length}
                                     </span>
@@ -157,7 +157,7 @@ const AllItems = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                             {filteredItems.length > 0 ? (
                                 filteredItems.map((item, idx) => (
                                     <ItemsCard 

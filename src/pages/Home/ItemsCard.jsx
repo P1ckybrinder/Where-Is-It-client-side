@@ -16,13 +16,13 @@ const ItemsCard = ({ item, delay = 0 }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -6, boxShadow: '0 12px 24px rgba(15, 23, 42, 0.12)' }}
       className="cursor-pointer h-full flex flex-col overflow-hidden rounded-xl border transition-all duration-300"
       onClick={() => navigate(`/items/${_id}`)}
       style={{
-        background: 'rgba(255, 255, 255, 0.88)',
-        borderColor: 'rgba(16, 185, 129, 0.15)',
-        boxShadow: '0 4px 12px rgba(15, 23, 42, 0.06)',
+        background: 'rgba(255, 255, 255, 0.92)',
+        borderColor: 'rgba(16, 185, 129, 0.2)',
+        boxShadow: '0 6px 16px rgba(15, 23, 42, 0.08)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)'
       }}
