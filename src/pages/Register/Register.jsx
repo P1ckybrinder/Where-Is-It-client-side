@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../context/Authcontext/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Lottie from 'lottie-react';
@@ -59,100 +60,97 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-zetech-light p-6 gap-8">
+    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4 gap-8">
       <Helmet>
         <title>Register - {schoolConfig.name} Lost & Found</title>
       </Helmet>
 
       {/* Form Section */}
-      <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 transition duration-300 hover:shadow-xl border border-gray-100">
-        <h1 className="text-3xl font-bold text-center mb-2 text-zetech-primary">
-          Create Your {schoolConfig.shortName} Account
+      <div className="w-full max-w-sm bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+        <h1 className="text-2xl font-bold text-center mb-1 text-gray-900">
+          Create Account
         </h1>
-        <p className="text-center text-gray-500 text-sm mb-6">Join our community today</p>
+        <p className="text-center text-gray-500 text-xs mb-5">Join {schoolConfig.shortName} Lost & Found</p>
         
-        <form onSubmit={handleSignUp} className="space-y-4">
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-full flex items-center justify-center gap-2 border border-gray-300 bg-white text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-50 transition duration-200 mb-4"
+        >
+          <FcGoogle size={20} />
+          Continue with Google
+        </button>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-2 bg-white text-gray-500">Or email</span>
+          </div>
+        </div>
+        
+        <form onSubmit={handleSignUp} className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
             <input
               type="text"
               name="name"
-              placeholder="John Doe"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
+              placeholder="Full name"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent transition duration-200"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Photo URL</label>
-            <input
-              type="text"
-              name="photo"
-              placeholder="https://example.com/photo.jpg"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
             <input
               type="email"
               name="email"
-              placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
+              placeholder="Email address"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent transition duration-200"
               required
             />
           </div>
           <div className="relative">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               name="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Secure password (6+ chars, uppercase & lowercase)"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
+              placeholder="Password (6+ chars)"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent transition duration-200"
               required
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-[2.6rem] text-gray-500 hover:text-zetech-primary transition duration-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition duration-200"
             >
-              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
             </button>
           </div>
+          <div>
+            <input
+              type="text"
+              name="photo"
+              placeholder="Photo URL"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent transition duration-200"
+              required
+            />
+          </div>
           
-          <button className="w-full bg-zetech-primary text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-zetech-accent hover:shadow-lg transition duration-300 mt-6 active:scale-95">
-            Sign Up
+          <button className="w-full bg-zetech-primary text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-zetech-accent transition duration-300 text-sm mt-2 active:scale-95">
+            Create account
           </button>
         </form>
-
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Or</span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleGoogleSignIn}
-          className="btn btn-outline w-full border-2 border-gray-200 text-gray-700 hover:border-zetech-primary hover:bg-zetech-primary hover:text-white transition duration-300 font-medium"
-        >
-          Sign up with Google
-        </button>
         
-        <div className="text-center mt-6 text-gray-600 text-sm">
+        <div className="text-center mt-4 text-gray-600 text-xs">
           Already have an account?{' '}
-          <Link to="/signin" className="text-zetech-primary hover:text-zetech-accent font-semibold transition duration-200">
+          <Link to="/signin" className="text-zetech-primary hover:underline font-semibold">
             Sign in
           </Link>
         </div>
       </div>
 
       {/* Animation Section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center">
-        <Lottie animationData={registerAnimation} className="w-full max-w-lg" />
+      <div className="hidden md:flex w-1/2 items-center justify-center">
+        <Lottie animationData={registerAnimation} className="w-full max-w-md" />
       </div>
     </div>
   );
