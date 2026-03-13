@@ -178,8 +178,8 @@
   /* Glass Button Variants */
   .glass-button-primary {
     @apply font-semibold transition-all duration-300 rounded-2xl;
-    /* Strong emerald green for clear visibility */
-    background: #16a34a;
+    /* Matching navbar Sign In color - vibrant teal/emerald */
+    background: #10b981;
     color: #ffffff;
     /* Glass effect with blur */
     backdrop-filter: blur(12px);
@@ -193,7 +193,7 @@
   }
 
   .glass-button-primary:hover:not(:disabled) {
-    background: #15803d;
+    background: #059669;
     border-color: rgba(16, 185, 129, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -201,7 +201,7 @@
 
   .glass-button-primary:active:not(:disabled) {
     transform: translateY(0);
-    background: #166534;
+    background: #047857;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
