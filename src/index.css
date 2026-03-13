@@ -178,25 +178,25 @@
   /* Glass Button Variants */
   .glass-button-primary {
     @apply font-semibold transition-all duration-300 rounded-full;
-    background: rgba(16, 185, 129, 0.25);
+    background: rgba(255, 255, 255, 0.18);
     color: white;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .glass-button-primary:hover:not(:disabled) {
-    background: rgba(16, 185, 129, 0.35);
-    border-color: rgba(16, 185, 129, 0.45);
-    box-shadow: 0 8px 28px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
   }
 
   .glass-button-primary:active:not(:disabled) {
     transform: translateY(0);
-    background: rgba(16, 185, 129, 0.3);
-    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .glass-button-secondary {

@@ -168,32 +168,32 @@ const Contact = () => {
                                 type="submit"
                                 className="w-full font-semibold py-3 px-4 rounded-full text-white transition-all duration-300"
                                 style={{
-                                    background: 'rgba(16, 185, 129, 0.25)',
-                                    backdropFilter: 'blur(20px)',
-                                    WebkitBackdropFilter: 'blur(20px)',
-                                    border: '1px solid rgba(16, 185, 129, 0.35)',
-                                    boxShadow: '0 4px 20px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                    background: 'rgba(255, 255, 255, 0.18)',
+                                    backdropFilter: 'blur(30px)',
+                                    WebkitBackdropFilter: 'blur(30px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
                                 }}
                                 onMouseEnter={(e) => {
-                                    e.target.style.background = 'rgba(16, 185, 129, 0.35)';
-                                    e.target.style.borderColor = 'rgba(16, 185, 129, 0.45)';
-                                    e.target.style.boxShadow = '0 8px 28px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+                                    e.target.style.background = 'rgba(255, 255, 255, 0.25)';
+                                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.35)';
+                                    e.target.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
                                     e.target.style.transform = 'translateY(-2px)';
                                 }}
                                 onMouseLeave={(e) => {
-                                    e.target.style.background = 'rgba(16, 185, 129, 0.25)';
-                                    e.target.style.borderColor = 'rgba(16, 185, 129, 0.35)';
-                                    e.target.style.boxShadow = '0 4px 20px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+                                    e.target.style.background = 'rgba(255, 255, 255, 0.18)';
+                                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                                    e.target.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                                     e.target.style.transform = 'translateY(0)';
                                 }}
                                 onMouseDown={(e) => {
-                                    e.target.style.background = 'rgba(16, 185, 129, 0.3)';
-                                    e.target.style.boxShadow = '0 2px 12px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+                                    e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+                                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                                     e.target.style.transform = 'translateY(0)';
                                 }}
                                 onMouseUp={(e) => {
-                                    e.target.style.background = 'rgba(16, 185, 129, 0.35)';
-                                    e.target.style.boxShadow = '0 8px 28px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+                                    e.target.style.background = 'rgba(255, 255, 255, 0.25)';
+                                    e.target.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
                                     e.target.style.transform = 'translateY(-2px)';
                                 }}
                             >
