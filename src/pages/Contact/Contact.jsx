@@ -82,75 +82,82 @@ const Contact = () => {
 
                 <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     {/* Contact Info Cards */}
-                    <div className="space-y-4">
-                        <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-zetech-primary">
-                            <div className="flex items-center gap-3 mb-2">
-                                <FaMapMarkerAlt className="text-zetech-primary text-xl" />
-                                <h3 className="font-bold text-gray-800">Office Location</h3>
+                    <div className="space-y-5">
+                        <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-zetech-primary hover:border-l-6">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="flex-shrink-0 p-3 bg-zetech-primary/10 rounded-lg">
+                                    <FaMapMarkerAlt className="text-zetech-primary text-2xl" />
+                                </div>
+                                <h3 className="text-lg font-bold text-gray-800">Office Location</h3>
                             </div>
-                            <p className="text-gray-600 text-sm">Administration Building, Ground Floor</p>
-                            <p className="text-gray-600 text-sm">{schoolConfig.contact.address}</p>
+                            <p className="text-gray-700 text-sm font-medium leading-relaxed ml-0">Administration Building, Ground Floor</p>
+                            <p className="text-gray-600 text-sm leading-relaxed ml-0 mt-1">{schoolConfig.contact.address}</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-zetech-secondary">
-                            <div className="flex items-center gap-3 mb-2">
-                                <FaClock className="text-zetech-secondary text-xl" />
-                                <h3 className="font-bold text-gray-800">Office Hours</h3>
+                        <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-zetech-secondary hover:border-l-6">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="flex-shrink-0 p-3 bg-zetech-secondary/10 rounded-lg">
+                                    <FaClock className="text-zetech-secondary text-2xl" />
+                                </div>
+                                <h3 className="text-lg font-bold text-gray-800">Office Hours</h3>
                             </div>
-                            <p className="text-gray-600 text-sm">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                            <p className="text-gray-600 text-sm">Saturday: 9:00 AM - 1:00 PM</p>
+                            <p className="text-gray-700 text-sm font-medium leading-relaxed">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                            <p className="text-gray-600 text-sm leading-relaxed mt-2">Saturday: 9:00 AM - 1:00 PM</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-zetech-accent">
-                            <div className="flex items-center gap-3 mb-2">
-                                <FaPhone className="text-zetech-accent text-xl" />
-                                <h3 className="font-bold text-gray-800">Phone & Email</h3>
+                        <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-zetech-accent hover:border-l-6">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="flex-shrink-0 p-3 bg-zetech-accent/10 rounded-lg">
+                                    <FaPhone className="text-zetech-accent text-2xl" />
+                                </div>
+                                <h3 className="text-lg font-bold text-gray-800">Phone & Email</h3>
                             </div>
-                            <p className="text-gray-600 text-sm">{schoolConfig.contact.phone}</p>
-                            <p className="text-gray-600 text-sm">{schoolConfig.contact.email}</p>
+                            <p className="text-gray-700 text-sm font-medium leading-relaxed">{schoolConfig.contact.phone}</p>
+                            <p className="text-gray-600 text-sm leading-relaxed mt-2">{schoolConfig.contact.email}</p>
                         </div>
                     </div>
 
                     {/* Contact Form */}
-                    <div className="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
-                        <h3 className="text-xl font-bold text-zetech-primary mb-6">Send us a Message</h3>
+                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Send us a Message</h3>
+                        <p className="text-gray-600 text-sm mb-6">We'll get back to you as soon as possible.</p>
                         <form onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                            <div className="mb-6">
+                                <label htmlFor="name" className="block text-sm font-semibold text-gray-800 mb-2">Name</label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-zetech-primary"
-                                    placeholder="Your Name"
+                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent focus:bg-white transition-all"
+                                    placeholder="Your name"
                                     required
                                 />
                             </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                            <div className="mb-6">
+                                <label htmlFor="email" className="block text-sm font-semibold text-gray-800 mb-2">Email</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-zetech-primary"
+                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent focus:bg-white transition-all"
                                     placeholder="your.email@zetech.ac.ke"
                                     required
                                 />
                             </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                            <div className="mb-6">
+                                <label htmlFor="message" className="block text-sm font-semibold text-gray-800 mb-2">Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-zetech-primary"
+                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:border-transparent focus:bg-white transition-all resize-none"
                                     placeholder="Describe your inquiry..."
                                     rows="4"
                                     required
@@ -159,7 +166,7 @@ const Contact = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-zetech-primary text-white py-2 px-4 rounded-lg hover:bg-zetech-accent transition duration-300"
+                                className="w-full bg-zetech-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-zetech-secondary active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md"
                             >
                                 Send Message
                             </button>
