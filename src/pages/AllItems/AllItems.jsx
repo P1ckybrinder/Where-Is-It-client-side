@@ -17,7 +17,7 @@ const AllItems = () => {
     const suggestions = [...new Set(items.map(item => item.title))].slice(0, 8);
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 500);
+        setLoading(false);
     }, []);
 
     useEffect(() => {
@@ -152,13 +152,13 @@ const AllItems = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                             {filteredItems.length > 0 ? (
-                                filteredItems.map((item, idx) => (
+                                filteredItems.map((item) => (
                                     <ItemsCard 
                                         key={item._id} 
                                         item={item}
-                                        delay={idx * 0.05}
+                                        delay={0}
                                     />
                                 ))
                             ) : (
