@@ -177,49 +177,39 @@
 
   /* Glass Button Variants */
   .glass-button-primary {
-    @apply font-bold transition-all duration-300 rounded-2xl;
-    /* Liquid glass emerald background with transparency */
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.38) 0%, rgba(5, 150, 105, 0.32) 100%);
+    @apply font-semibold transition-all duration-300 rounded-2xl;
+    /* True liquid glass: pure transparency with gentle color tint */
+    background: rgba(16, 185, 129, 0.25);
     color: #ffffff;
-    /* Strong blur effect for liquid glass */
-    backdrop-filter: blur(60px) saturate(1.2);
-    -webkit-backdrop-filter: blur(60px) saturate(1.2);
-    /* Soft emerald border with transparency */
-    border: 2px solid rgba(52, 211, 153, 0.5);
-    /* Layered shadows: outer glow, floating effect, and inner light reflections */
+    /* Smooth blur for frosted glass effect */
+    backdrop-filter: blur(55px);
+    -webkit-backdrop-filter: blur(55px);
+    /* Subtle emerald border */
+    border: 1.5px solid rgba(52, 211, 153, 0.4);
+    /* Minimal shadows for clean, floating appearance */
     box-shadow: 
-      0 0 30px rgba(16, 185, 129, 0.25),
-      0 8px 32px rgba(5, 78, 59, 0.2),
-      inset 0 1px 2px rgba(255, 255, 255, 0.6),
-      inset 0 -1px 2px rgba(0, 0, 0, 0.1),
-      inset -1px 0 2px rgba(255, 255, 255, 0.3);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    letter-spacing: 0.5px;
-    font-weight: 600;
+      0 4px 20px rgba(16, 185, 129, 0.12),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    text-shadow: none;
+    letter-spacing: 0.3px;
   }
 
   .glass-button-primary:hover:not(:disabled) {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(5, 150, 105, 0.42) 100%);
-    border-color: rgba(74, 222, 128, 0.65);
-    /* Enhanced glow and reflections on hover */
+    background: rgba(16, 185, 129, 0.32);
+    border-color: rgba(74, 222, 128, 0.5);
+    /* Gentle enhancement on hover */
     box-shadow: 
-      0 0 40px rgba(16, 185, 129, 0.35),
-      0 12px 40px rgba(10, 120, 80, 0.28),
-      inset 0 1px 3px rgba(255, 255, 255, 0.7),
-      inset 0 -1px 2px rgba(0, 0, 0, 0.08),
-      inset -1px 0 3px rgba(255, 255, 255, 0.4);
-    transform: translateY(-4px);
+      0 6px 24px rgba(16, 185, 129, 0.16),
+      inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px);
   }
 
   .glass-button-primary:active:not(:disabled) {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.42) 0%, rgba(5, 150, 105, 0.36) 100%);
+    transform: translateY(0);
+    background: rgba(16, 185, 129, 0.28);
     box-shadow: 
-      0 0 25px rgba(16, 185, 129, 0.2),
-      0 4px 16px rgba(5, 78, 59, 0.15),
-      inset 0 1px 2px rgba(255, 255, 255, 0.5),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.12),
-      inset -1px 0 2px rgba(255, 255, 255, 0.25);
+      0 2px 12px rgba(16, 185, 129, 0.1),
+      inset 0 1px 1px rgba(255, 255, 255, 0.35);
   }
 
   .glass-button-secondary {
