@@ -178,38 +178,29 @@
   /* Glass Button Variants */
   .glass-button-primary {
     @apply font-semibold transition-all duration-300 rounded-2xl;
-    /* True liquid glass: pure transparency with gentle color tint */
-    background: rgba(16, 185, 129, 0.25);
+    /* Ultra-minimal liquid glass: barely-there transparency */
+    background: rgba(16, 185, 129, 0.08);
     color: #ffffff;
-    /* Smooth blur for frosted glass effect */
-    backdrop-filter: blur(55px);
-    -webkit-backdrop-filter: blur(55px);
-    /* Subtle emerald border */
-    border: 1.5px solid rgba(52, 211, 153, 0.4);
-    /* Minimal shadows for clean, floating appearance */
-    box-shadow: 
-      0 4px 20px rgba(16, 185, 129, 0.12),
-      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    /* Subtle blur for true frosted glass effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Minimal emerald border */
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    /* No shadows for clean, flat appearance */
+    box-shadow: none;
     text-shadow: none;
     letter-spacing: 0.3px;
   }
 
   .glass-button-primary:hover:not(:disabled) {
-    background: rgba(16, 185, 129, 0.32);
-    border-color: rgba(74, 222, 128, 0.5);
-    /* Gentle enhancement on hover */
-    box-shadow: 
-      0 6px 24px rgba(16, 185, 129, 0.16),
-      inset 0 1px 1px rgba(255, 255, 255, 0.45);
-    transform: translateY(-2px);
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateY(-1px);
   }
 
   .glass-button-primary:active:not(:disabled) {
     transform: translateY(0);
-    background: rgba(16, 185, 129, 0.28);
-    box-shadow: 
-      0 2px 12px rgba(16, 185, 129, 0.1),
-      inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    background: rgba(16, 185, 129, 0.11);
   }
 
   .glass-button-secondary {
