@@ -166,9 +166,25 @@ const Contact = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-zetech-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-zetech-secondary active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md"
+                                className="w-full relative overflow-hidden group font-semibold py-3 px-4 rounded-2xl text-white transition-all duration-300 active:scale-95"
+                                style={{
+                                    background: 'rgba(16, 185, 129, 0.8)',
+                                    backdropFilter: 'blur(12px)',
+                                    border: '1px solid rgba(16, 185, 129, 0.5)',
+                                    boxShadow: '0 8px 24px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.target.style.background = 'rgba(16, 185, 129, 0.95)';
+                                    e.target.style.boxShadow = '0 12px 32px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.target.style.background = 'rgba(16, 185, 129, 0.8)';
+                                    e.target.style.boxShadow = '0 8px 24px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                                }}
                             >
-                                Send Message
+                                <span className="relative z-10 flex items-center justify-center">
+                                    Send Message
+                                </span>
                             </button>
                         </form>
                     </div>
