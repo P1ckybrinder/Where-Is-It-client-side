@@ -60,12 +60,12 @@ const AllItems = () => {
 
             {/* Search Bar */}
             <motion.div
-                className="mb-8 flex justify-center"
+                className="mb-6 flex justify-center"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                <div className="w-full max-w-2xl">
+                <div className="w-full max-w-3xl">
                     <GlassSearchBar
                         placeholder="Search by title, location, or category..."
                         value={searchValue}
@@ -76,77 +76,72 @@ const AllItems = () => {
                 </div>
             </motion.div>
 
-            <div className="flex flex-col lg:flex-row gap-8">
-                {/* Sidebar Section - Categories */}
-                <motion.div
-                    className="lg:w-1/4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                    <GlassCard variant="elevated" className="p-0 sticky top-24 overflow-hidden">
-                        {/* Header */}
-                        <div className="bg-gradient-to-r from-zetech-primary to-zetech-secondary px-6 py-5">
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                <span className="text-2xl">🏷️</span>
-                                Categories
-                            </h3>
-                        </div>
+            {/* Horizontal Categories Bar */}
+            <motion.div
+                className="mb-8 overflow-x-auto pb-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+            >
+                <div className="flex gap-3 min-w-min">
+                    {/* All Categories Button */}
+                    <motion.button
+                        onClick={() => setSelectedCategory('')}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${
+                            !selectedCategory
+                                ? 'glass-button-primary shadow-lg'
+                                : 'glass-button-secondary hover:scale-105'
+                        }`}
+                    >
+                        <span>🏷️</span>
+                        <span>All</span>
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                            !selectedCategory 
+                                ? 'bg-white/25 text-white' 
+                                : 'bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200'
+                        }`}>
+                            {items.length}
+                        </span>
+                    </motion.button>
 
-                        {/* Categories List */}
-                        <div className="p-4 space-y-1.5">
-                            <motion.button
-                                onClick={() => setSelectedCategory('')}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-between group ${
-                                    !selectedCategory
-                                        ? 'bg-gradient-to-r from-zetech-primary to-zetech-secondary text-white shadow-md'
-                                        : 'text-slate-800 dark:text-slate-100 hover:bg-green-50 dark:hover:bg-slate-800/50 border border-transparent hover:border-zetech-primary/20'
-                                }`}
-                            >
-                                <span>All Categories</span>
-                                <span className={`text-sm font-semibold ${!selectedCategory ? 'text-white/90' : 'text-slate-700 dark:text-slate-300'}`}>
-                                    {items.length}
-                                </span>
-                            </motion.button>
+                    {/* Category Buttons */}
+                    {categories.map((category, idx) => (
+                        <motion.button
+                            key={category}
+                            onClick={() => setSelectedCategory(category)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.05 }}
+                            className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${
+                                selectedCategory === category
+                                    ? 'glass-button-primary shadow-lg'
+                                    : 'glass-button-secondary hover:scale-105'
+                            }`}
+                        >
+                            <span className="capitalize">{category}</span>
+                            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                                selectedCategory === category
+                                    ? 'bg-white/25 text-white'
+                                    : 'bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200'
+                            }`}>
+                                {items.filter(i => i.category === category).length}
+                            </span>
+                        </motion.button>
+                    ))}
+                </div>
+            </motion.div>
 
-                            {categories.map((category, idx) => (
-                                <motion.button
-                                    key={category}
-                                    onClick={() => setSelectedCategory(category)}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: idx * 0.05 }}
-                                    className={`w-full text-left px-4 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-between group ${
-                                        selectedCategory === category
-                                            ? 'bg-green-100 dark:bg-green-900/30 text-zetech-primary dark:text-green-200 border border-zetech-primary/50 shadow-sm'
-                                            : 'text-slate-800 dark:text-slate-100 hover:bg-green-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-zetech-primary/20'
-                                    }`}
-                                >
-                                    <span className="capitalize">{category}</span>
-                                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full transition-all ${
-                                        selectedCategory === category
-                                            ? 'bg-zetech-primary text-white'
-                                            : 'bg-slate-300 dark:bg-slate-600 text-slate-800 dark:text-slate-200 group-hover:bg-zetech-primary group-hover:text-white'
-                                    }`}>
-                                        {items.filter(i => i.category === category).length}
-                                    </span>
-                                </motion.button>
-                            ))}
-                        </div>
-                    </GlassCard>
-                </motion.div>
-
-                {/* Main Content Section */}
-                <motion.div
-                    className="lg:w-3/4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                >
+            {/* Main Content Section */}
+            <motion.div
+                className="w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+            >
                     {loading ? (
                         <div className="flex justify-center items-center h-96">
                             <div className="glass-card-default p-8 rounded-2xl">
@@ -157,7 +152,7 @@ const AllItems = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                             {filteredItems.length > 0 ? (
                                 filteredItems.map((item, idx) => (
                                     <ItemsCard 
@@ -184,8 +179,7 @@ const AllItems = () => {
                             )}
                         </div>
                     )}
-                </motion.div>
-            </div>
+            </motion.div>
 
             {/* Footer Section */}
             <motion.div
