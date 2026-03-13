@@ -59,79 +59,92 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-zetech-light p-6 gap-6">
+    <div className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center bg-zetech-light p-6 gap-8">
       <Helmet>
         <title>Register - {schoolConfig.name} Lost & Found</title>
       </Helmet>
 
       {/* Form Section */}
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 transition duration-300 hover:shadow-2xl">
-        <h1 className="text-2xl font-bold text-center mb-4 text-zetech-primary">
+      <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 transition duration-300 hover:shadow-xl border border-gray-100">
+        <h1 className="text-3xl font-bold text-center mb-2 text-zetech-primary">
           Create Your {schoolConfig.shortName} Account
         </h1>
-        <form onSubmit={handleSignUp} className="space-y-3">
+        <p className="text-center text-gray-500 text-sm mb-6">Join our community today</p>
+        
+        <form onSubmit={handleSignUp} className="space-y-4">
           <div>
-            <label className="label-text text-black dark:text-gray-300 text-sm">Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
             <input
               type="text"
               name="name"
-              placeholder="Name"
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 py-2"
+              placeholder="John Doe"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
               required
             />
           </div>
           <div>
-            <label className="label-text text-black dark:text-gray-300 text-sm">Photo URL</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Photo URL</label>
             <input
               type="text"
               name="photo"
-              placeholder="Photo URL"
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 py-2"
+              placeholder="https://example.com/photo.jpg"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
               required
             />
           </div>
           <div>
-            <label className="label-text text-black dark:text-gray-300 text-sm">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
             <input
               type="email"
               name="email"
-              placeholder="Email"
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 py-2"
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
               required
             />
           </div>
           <div className="relative">
-            <label className="label-text text-black dark:text-gray-300 text-sm">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               name="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Your password"
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-200 py-2"
+              placeholder="Secure password (6+ chars, uppercase & lowercase)"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zetech-primary focus:bg-white transition duration-200"
               required
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-[2.2rem] text-gray-700 dark:text-gray-300"
+              className="absolute right-4 top-[2.6rem] text-gray-500 hover:text-zetech-primary transition duration-200"
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
             </button>
           </div>
-          <button className="btn w-full bg-zetech-primary text-white rounded-lg shadow hover:bg-zetech-accent hover:shadow-lg hover:scale-105 transition duration-300 mt-3">
+          
+          <button className="w-full bg-zetech-primary text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-zetech-accent hover:shadow-lg transition duration-300 mt-6 active:scale-95">
             Sign Up
           </button>
         </form>
 
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-200"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">Or</span>
+          </div>
+        </div>
+
         <button
           type="button"
           onClick={handleGoogleSignIn}
-          className="btn btn-outline w-full mt-3 border-zetech-primary text-zetech-primary hover:bg-zetech-primary hover:text-white transition duration-300"
+          className="btn btn-outline w-full border-2 border-gray-200 text-gray-700 hover:border-zetech-primary hover:bg-zetech-primary hover:text-white transition duration-300 font-medium"
         >
           Sign up with Google
         </button>
-        <div className="text-center mt-3 text-gray-600 text-sm">
+        
+        <div className="text-center mt-6 text-gray-600 text-sm">
           Already have an account?{' '}
-          <Link to="/signin" className="text-zetech-primary hover:underline font-semibold">
+          <Link to="/signin" className="text-zetech-primary hover:text-zetech-accent font-semibold transition duration-200">
             Sign in
           </Link>
         </div>
